@@ -20,7 +20,7 @@
 <body>
 <div class="container py-2">
     <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+        <a href="{{ route('home') }}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
             JOURNAL
         </a>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use Illuminate\Contracts\Support\Renderable;
 
 class HomeController extends Controller
@@ -23,6 +24,6 @@ class HomeController extends Controller
      */
     public function index() : object
     {
-        return view('home');
+        return view('home')->with('patients', Patient::all());
     }
 }

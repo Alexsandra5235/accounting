@@ -11,12 +11,7 @@ class PatientController extends Controller
     protected PatientService $patientService;
     public function __construct(PatientService $patientService){
         $this->patientService = $patientService;
-    }
-    // переход на страницу добавления данных
-    public function index() : object
-    {
-        $patients = Patient::all();
-        return view('log')->with('patients', $patients);
+        $this->middleware('auth');
     }
 
     public function store(Request $request) : object

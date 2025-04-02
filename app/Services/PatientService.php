@@ -12,12 +12,12 @@ class PatientService
             'name' => 'required|string|max:255',
             'birth_day' => 'required|date',
             'gender' => 'required|string',
-            'passport' => 'required|string|min:6',
-            'nationality' => 'required|string',
-            'address' => 'required|string',
-            'register_place' => 'required|string',
-            'snils' => 'required|string',
-            'polis' => 'required|string',
+            'passport' => 'string|min:6',
+            'nationality' => 'string',
+            'address' => 'string',
+            'register_place' => 'string',
+            'snils' => 'string',
+            'polis' => 'string',
             'medical_card' => 'required|string',
         ]);
     }
