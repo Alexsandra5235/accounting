@@ -23,4 +23,8 @@ class Patient extends Model
         'polis',
         'medical_card',
     ];
+
+    protected array $dates = [
+        'birth_day'
+    ];
 }

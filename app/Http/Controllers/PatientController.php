@@ -18,8 +18,7 @@ class PatientController extends Controller
     {
         $this->patientService->validate($request);
 
-        Patient::query()->create($request->all());
-        return redirect()->to('/home');
+        return Patient::query()->create($request->all());
     }
 
     public function update(Request $request, $id) : object
@@ -29,14 +28,13 @@ class PatientController extends Controller
         $patient = Patient::query()->findOrFail($id);
         $patient->update($request->all());
 
-        return redirect()->to('/home');
+        return $patient;
     }
 
-    public function destroy($id) : object
+    public function destroy($id) : void
     {
         $patient = Patient::query()->findOrFail($id);
         $patient->delete();
 
-        return redirect()->to('/home');
     }
 }

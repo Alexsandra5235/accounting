@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->date('birth_day');
             $table->string('gender');
-            $table->string('passport');
-            $table->string('nationality');
-            $table->string('address');
-            $table->string('register_place');
-            $table->string('snils');
-            $table->string('polis');
             $table->string('medical_card');
+            $table->string('passport')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('address')->nullable();
+            $table->string('register_place')->nullable();
+            $table->string('snils')->nullable();
+            $table->string('polis')->nullable();
             $table->timestamps();
         });
     }
