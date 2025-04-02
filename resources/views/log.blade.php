@@ -82,7 +82,7 @@
                         </svg>
                     </a>
                 </label><br>
-                <input value="{{ old('birth_ady') }}" class="form-control mb-4" type="date" name="birth_day" id="birth_day" >
+                <input value="{{ old('birth_day') }}" class="form-control mb-4" type="date" name="birth_day" id="birth_day" >
 
                 <label class="form-label" for="gender">Пол (мужской, женский)
                     <a href="#" style="text-decoration: none"
@@ -96,8 +96,8 @@
                 </label><br>
                 <select class="form-select mb-4" name="gender" id="gender" size="1" >
                     <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                    <option value="мужской">мужской</option>
-                    <option value="женский">женский</option>
+                    <option value="мужской" {{ old('gender') == 'мужской' ? 'selected' : '' }}>мужской</option>
+                    <option value="женский" {{ old('gender') == 'женский' ? 'selected' : '' }}>женский</option>
                 </select>
 
                 <label class="form-label" for="medical_card">Номер медицинской карты
@@ -133,7 +133,7 @@
 
                 <label class="form-label" for="phone_agent">Номер телефона законного представителя, лица, которому может
                     быть передана информация о состоянии здоровья пациента</label>
-                <input class="form-control mb-4" type="text" id="phone_agent" name="phone_agent" maxlength="18" placeholder="8 (XXX) XXX XX XX" autocomplete="off">
+                <input value="{{ old('phone_agent') }}" class="form-control mb-4" type="text" id="phone_agent" name="phone_agent" maxlength="18" placeholder="8 (XXX) XXX XX XX" autocomplete="off">
 
                 <label class="form-label" for="snils">СНИСЛ (при наличии)</label>
                 <input value="{{ old('snils') }}" class="form-control mb-4" type="text" id="snils" name="snils" maxlength="14" placeholder="XXX-XXX-XXX XX" autocomplete="off">
@@ -144,56 +144,58 @@
                 <label class="form-label" for="delivered">Пациент доставлен (направлен)</label>
                 <select class="form-select mb-4" name="delivered" id="delivered" size="1">
                     <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                    <option value="полицией">полицией</option>
-                    <option value="бригадой скорой медицинской помощи">бригадой скорой медицинской помощи</option>
+                    <option value="полицией" {{ old('delivered' == 'полицией' ? 'selected' : '') }}>полицией</option>
+                    <option value="бригадой скорой медицинской помощи" {{ old('delivered' == 'бригадой скорой медицинской помощи' ? 'selected' : '') }}>бригадой скорой медицинской помощи </option>
                 </select>
 
                 <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
                     установление наличия или отсутствия признаков состояния опьянения при поступлении пациента
                     в медицинскую организацию</label>
-                <input class="form-control mb-4" type="text" id="fact_alcohol" name="fact_alcohol" autocomplete="off">
+                <input value="{{ old('fact_alcohol') }}" class="form-control mb-4" type="text" id="fact_alcohol" name="fact_alcohol" autocomplete="off">
 
                 <label class="form-label" for="datetime_alcohol">Дата и время взятия пробы</label>
-                <input class="form-control mb-4" type="datetime-local" id="datetime_alcohol" name="datetime_alcohol">
+                <input value="{{ old('datetime_alcohol') }}" class="form-control mb-4" type="datetime-local" id="datetime_alcohol" name="datetime_alcohol">
 
                 <label class="form-label" for="result_research">Результаты лабораторных исследований</label>
-                <input class="form-control mb-4" type="text" id="result_research" name="result_research">
+                <input value="{{ old('result_research') }}" class="form-control mb-4" type="text" id="result_research" name="result_research">
 
                 <label class="form-label" for="section_medical">Отделение медицинской организации, в которое направлен пациент</label>
-                <input class="form-control mb-4" type="text" id="section_medical" name="section_medical" autocomplete="off">
+                <input value="{{ old('section_medical') }}" class="form-control mb-4" type="text" id="section_medical" name="section_medical" autocomplete="off">
 
                 <label class="form-label" for="outcome">Исход госпитализации</label>
                 <select class="form-select mb-4" name="outcome" id="outcome" size="1">
                     <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                    <option value="умер">умер</option>
+                    <option value="умер" {{ old('outcome' == 'умер' ? 'selected' : '') }}>умер</option>
+                    <option value="выписан" {{ old('outcome' == 'выписан' ? 'selected' : '') }}>умер</option>
+
                 </select>
 
                 <label class="form-label" for="datetime_discharge">Дата и время исхода</label>
-                <input class="form-control mb-4" type="datetime-local" id="datetime_discharge" name="datetime_discharge" autocomplete="off">
+                <input value="{{ old('datetime_discharge') }}" class="form-control mb-4" type="datetime-local" id="datetime_discharge" name="datetime_discharge" autocomplete="off">
 
                 <div id="medicalOrgField">
                     <label class="form-label" for="section_transferred">Наименование медицинской организации, куда переведен пациент</label>
-                    <input class="form-control mb-4" type="text" id="section_transferred" name="section_transferred" autocomplete="off">
+                    <input value="{{ old('section_transferred') }}" class="form-control mb-4" type="text" id="section_transferred" name="section_transferred" autocomplete="off">
                 </div>
 
                 <label class="form-label" for="datetime_inform"> Дата и время сообщения законному представителю, иному лицу<br>
                     или медицинской организации, направившей пациента, о госпитализации (отказе в госпитализации) пациента, ее исходе</label>
-                <input class="form-control mb-4" type="datetime-local" id="datetime_inform" name="datetime_inform" autocomplete="off">
+                <input value="{{ old('datetime_inform') }}" class="form-control mb-4" type="datetime-local" id="datetime_inform" name="datetime_inform" autocomplete="off">
 
                 <h4> В случае отказа в госпитализации в стационар, дневной стационар</h4>
 
                 <label class="form-label" for="reason_refusal">Причина отказа в госпитализации</label>
                 <select class="form-select mb-4" name="reason_refusal" id="reason_refusal" size="1">
                     <option value="" selected style="font-weight: bold"> Пожалуйста, сделайте выбор...</option>
-                    <option value="устал">устал</option>
+                    <option value="устал" {{ old('reason_refusal' == 'устал' ? 'selected' : '') }}>устал</option>
                 </select>
 
                 <label class="form-label" for="name_medical_worker">Фамилия, имя, отчество (при наличии) медицинского работника,
                     зафиксировавшего причину отказа в госпитализации</label>
-                <input class="form-control mb-4" type="text" id="name_medical_worker" name="name_medical_worker" autocomplete="off" placeholder="Иванов Иван Иванович">
+                <input value="{{ old('name_medical_worker') }}" class="form-control mb-4" type="text" id="name_medical_worker" name="name_medical_worker" autocomplete="off" placeholder="Иванов Иван Иванович">
 
                 <label class="form-label" for="add_info">Дополнительные сведения</label>
-                <input class="form-control mb-4" type="text" id="add_info" name="add_info" autocomplete="off">
+                <input value="{{ old('add_info') }}" class="form-control mb-4" type="text" id="add_info" name="add_info" autocomplete="off">
 
                 <input type="submit" value="Добавить запись" class="btn btn-primary">
             </form>
