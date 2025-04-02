@@ -53,11 +53,10 @@ class LogController extends Controller
         return redirect()->to('/home');
     }
 
-//    public function index() : object
-//    {
-//        $logs = Log::all();
-//        return redirect();
-//    }
+    public function index() : object
+    {
+        return view('log');
+    }
 
 //    public function show($id)
 //    {

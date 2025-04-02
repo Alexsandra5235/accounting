@@ -130,7 +130,54 @@
                         </svg>
                     </a>
                 </label><br>
-                <input value="{{ old('midical_card') }}" class="form-control mb-4" type="text" name="medical_card" id="medical_card">
+                <input value="{{ old('medical_card') }}" class="form-control mb-4" type="text" name="medical_card" id="medical_card">
+
+                <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
+                    установление наличия или отсутствия признаков состояния опьянения при поступлении пациента
+                    в медицинскую организацию</label>
+                <input class="form-control mb-4" type="text" id="fact_alcohol" name="fact_alcohol" autocomplete="off">
+
+                <label class="form-label" for="datetime_alcohol">Дата и время взятия пробы</label>
+                <input class="form-control mb-4" type="datetime-local" id="datetime_alcohol" name="datetime_alcohol">
+
+                <label class="form-label" for="result_research">Результаты лабораторных исследований</label>
+                <input class="form-control mb-4" type="text" id="result_research" name="result_research">
+
+                <label class="form-label" for="section_medical">Отделение медицинской организации, в которое направлен пациент</label>
+                <input class="form-control mb-4" type="text" id="section_medical" name="section_medical" autocomplete="off">
+
+                <label class="form-label" for="outcome">Исход госпитализации</label>
+                <select class="form-select mb-4" name="outcome" id="outcome" size="1">
+                    <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
+                    <option value="умер">умер</option>
+                </select>
+
+                <label class="form-label" for="datetime_discharge">Дата и время исхода</label>
+                <input class="form-control mb-4" type="datetime-local" id="datetime_discharge" name="datetime_discharge" autocomplete="off">
+
+                <div id="medicalOrgField">
+                    <label class="form-label" for="section_transferred">Наименование медицинской организации, куда переведен пациент</label>
+                    <input class="form-control mb-4" type="text" id="section_transferred" name="section_transferred" autocomplete="off">
+                </div>
+
+                <label class="form-label" for="datetime_inform"> Дата и время сообщения законному представителю, иному лицу<br>
+                    или медицинской организации, направившей пациента, о госпитализации (отказе в госпитализации) пациента, ее исходе</label>
+                <input class="form-control mb-4" type="datetime-local" id="datetime_inform" name="datetime_inform" autocomplete="off">
+
+                <h4> В случае отказа в госпитализации в стационар, дневной стационар</h4>
+
+                <label class="form-label" for="reason_refusal">Причина отказа в госпитализации</label>
+                <select class="form-select mb-4" name="reason_refusal" id="reason_refusal" size="1">
+                    <option value="" selected style="font-weight: bold"> Пожалуйста, сделайте выбор...</option>
+                    <option value="устал">устал</option>
+                </select>
+
+                <label class="form-label" for="name_medical_worker">Фамилия, имя, отчество (при наличии) медицинского работника,
+                    зафиксировавшего причину отказа в госпитализации</label>
+                <input class="form-control mb-4" type="text" id="name_medical_worker" name="name_medical_worker" autocomplete="off" placeholder="Иванов Иван Иванович">
+
+                <label class="form-label" for="add_info">Дополнительные сведения</label>
+                <input class="form-control mb-4" type="text" id="add_info" name="add_info" autocomplete="off">
 
                 <input type="submit" value="Добавить запись" class="btn btn-primary">
             </form>
