@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class PatientService
@@ -21,4 +22,11 @@ class PatientService
             'polis' => 'nullable|string',
         ]);
     }
+    public function store(Request $request) : Patient
+    {
+        $validatedData = $this->validate($request);
+
+        return Patient::query()->create($validatedData);
+    }
+
 }

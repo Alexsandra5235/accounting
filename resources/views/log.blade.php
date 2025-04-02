@@ -84,6 +84,18 @@
                     <option value="женский">женский</option>
                 </select>
 
+                <label class="form-label" for="medical_card">Номер медицинской карты
+                    <a href="#" style="text-decoration: none"
+                       data-bs-toggle="tooltip" data-bs-placement="top"
+                       data-bs-custom-class="custom-tooltip"
+                       data-bs-title="Это поле обязательно для заполнения">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" style="color: dodgerblue" class="bi bi-asterisk" viewBox="0 0 16 16">
+                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/>
+                        </svg>
+                    </a>
+                </label><br>
+                <input value="{{ old('medical_card') }}" class="form-control mb-4" type="text" name="medical_card" id="medical_card">
+
                 <label class="form-label" for="passport">Серия и номер паспорта или иного документа, удостоверяющего личность (при наличии)</label><br>
                 <input value="{{ old('passport') }}" class="form-control mb-4" type="text" name="passport" id="passport" maxlength="12" placeholder="XX XX XXXXXX">
 
@@ -119,18 +131,6 @@
                     <option value="полицией">полицией</option>
                     <option value="бригадой скорой медицинской помощи">бригадой скорой медицинской помощи</option>
                 </select>
-
-                <label class="form-label" for="medical_card">Номер медицинской карты
-                    <a href="#" style="text-decoration: none"
-                       data-bs-toggle="tooltip" data-bs-placement="top"
-                       data-bs-custom-class="custom-tooltip"
-                       data-bs-title="Это поле обязательно для заполнения">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" style="color: dodgerblue" class="bi bi-asterisk" viewBox="0 0 16 16">
-                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/>
-                        </svg>
-                    </a>
-                </label><br>
-                <input value="{{ old('medical_card') }}" class="form-control mb-4" type="text" name="medical_card" id="medical_card">
 
                 <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
                     установление наличия или отсутствия признаков состояния опьянения при поступлении пациента

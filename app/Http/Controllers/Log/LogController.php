@@ -5,10 +5,21 @@ namespace App\Http\Controllers\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Log\Log;
 use App\Models\Patient;
+use App\Services\Log\LogDischargeService;
+use App\Services\Log\LogReceiptService;
+use App\Services\Log\LogRejectService;
+use App\Services\Log\LogService;
+use App\Services\PatientService;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
+    protected LogService $logService;
+    public function __construct(LogService $logService){
+
+        $this->logService = $logService;
+        $this->middleware('auth');
+    }
     public function show($id) : object
     {
         return view('logShow')->with('log',Patient::query()->findOrFail($id));
@@ -16,15 +27,7 @@ class LogController extends Controller
 
     public function store(Request $request) : object
     {
-
-        $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'log_receipt_id' => 'required|exists:log_receipts,id',
-            'log_discharge_id' => 'nullable|exists:log_discharges,id',
-            'log_reject_id' => 'nullable|exists:log_rejects,id',
-        ]);
-
-        Log::query()->create($request->all());
+        $this->logService->store($request);
 
         return redirect()->to('/home');
     }
