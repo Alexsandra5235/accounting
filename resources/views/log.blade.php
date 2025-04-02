@@ -30,7 +30,8 @@
                         </svg>
                     </a>
                 </label><br>
-                <input class="form-control mb-4" type="date" name="date_receipt" id="date_receipt" value="${date_now}" >
+                <input class="form-control mb-4" type="date" name="date_receipt" id="date_receipt"
+                        value="{{ date('Y-m-d') }}">
 
                 <label class="form-label" for="time_receipt">Время поступления
                     <a href="#" style="text-decoration: none"
@@ -42,7 +43,8 @@
                         </svg>
                     </a>
                 </label><br>
-                <input class="form-control mb-4" type="time" name="time_receipt" id="time_receipt" maxlength="5" value="${time_now}">
+                <input class="form-control mb-4" type="time" name="time_receipt" id="time_receipt" maxlength="5"
+                       value="{{ date("H:i", strtotime('+7 hours')) }}">
 
                 <label class="form-label" for="name">Фамилия, имя, отчество (при наличии)
                     <a href="#" style="text-decoration: none"
