@@ -6,16 +6,30 @@
 
 @section('content')
     <div class="container">
-        @if ($errors->any())
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="container text-white blurBG" style="justify-content: center; width: 50vw; border-radius: 7px">
+            @if ($errors->has('save_error'))
+                <div class="card">
+                    <div class="card_body">
+                        <div class="card-header">
+                            Ошибка данных
+                        </div>
+                    {{ $errors->first('save_error') }}
+                    </div>
+                </div>
+            @elseif($errors->any())
+                <div class="card">
+                    <div class="card_body">
+                        <div class="card-header">
+                            Ошибка данных
+                        </div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
             <h4 style="padding-top: 16px">Добавление записи</h4>
             <hr>
             <form action="{{ route('log.store') }}" method="post" autocomplete="off" id="formAddJournal" style="padding: 10px; margin-bottom: 20px">
@@ -117,9 +131,9 @@
                     Совпадает с местом регистрации
                 </label>
 
-                <label class="form-label" for="number_phone_representative">Номер телефона законного представителя, лица, которому может
+                <label class="form-label" for="phone_agent">Номер телефона законного представителя, лица, которому может
                     быть передана информация о состоянии здоровья пациента</label>
-                <input class="form-control mb-4" type="text" id="number_phone_representative" name="number_phone_representative" maxlength="18" placeholder="8 (XXX) XXX XX XX" autocomplete="off">
+                <input class="form-control mb-4" type="text" id="phone_agent" name="phone_agent" maxlength="18" placeholder="8 (XXX) XXX XX XX" autocomplete="off">
 
                 <label class="form-label" for="snils">СНИСЛ (при наличии)</label>
                 <input value="{{ old('snils') }}" class="form-control mb-4" type="text" id="snils" name="snils" maxlength="14" placeholder="XXX-XXX-XXX XX" autocomplete="off">

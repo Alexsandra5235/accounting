@@ -22,12 +22,13 @@ class LogController extends Controller
     }
     public function show($id) : object
     {
-        return view('logShow')->with('log',Patient::query()->findOrFail($id));
+        return view('logShow')->with('log', Log::query()->findOrFail($id));
     }
 
     public function store(Request $request) : object
     {
-        $this->logService->store($request);
+        $log = $this->logService->store($request);
+        if($log == null) return redirect()->back()->withErrors(['save_error' => 'Не удалось сохранить данные. Пожалуйста, попробуйте еще раз.']);
 
         return redirect()->to('/home');
     }
