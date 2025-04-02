@@ -12,19 +12,17 @@ class LogDischargeController extends Controller
     public function store(Request $request) : object
     {
         $validator = Validator::make($request->all(), [
-            'datetime_discharge' => 'date',
-            'datetime_inform' => 'date',
-            'outcome' => 'string|max:255',
-            'section_transferred' => 'string|max:255',
+            'datetime_discharge' => 'nullable|date',
+            'datetime_inform' => 'nullable|date',
+            'outcome' => 'nullable|string|max:255',
+            'section_transferred' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        LogDischarge::query()->create($request->all());
-
-        return redirect()->to('/home');
+        return LogDischarge::query()->create($request->all());
     }
 
     public function update(Request $request, $id) : object
@@ -36,10 +34,10 @@ class LogDischargeController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'datetime_discharge' => 'sometimes|date',
-            'datetime_inform' => 'sometimes|date',
-            'outcome' => 'sometimes|string|max:255',
-            'section_transferred' => 'sometimes|string|max:255',
+            'datetime_discharge' => 'sometimes|nullable|date',
+            'datetime_inform' => 'sometimes|nullable|date',
+            'outcome' => 'sometimes|nullable|string|max:255',
+            'section_transferred' => 'sometimes|nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -48,19 +46,15 @@ class LogDischargeController extends Controller
 
         $logDischarge->update($request->all());
 
-        return redirect()->to('/home');
+        return $logDischarge;
     }
 
-    public function destroy($id) : object
+    public function destroy($id) : void
     {
         $logDischarge = LogDischarge::all()->find($id);
 
-        if (!$logDischarge) {
-            return redirect()->back()->withErrors('Log Discharge not found');
-        }
+        if (!$logDischarge) return;
 
         $logDischarge->delete();
-
-        return redirect()->to('/home');
     }
 }
