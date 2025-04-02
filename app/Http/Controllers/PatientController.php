@@ -12,10 +12,11 @@ class PatientController extends Controller
     public function __construct(PatientService $patientService){
         $this->patientService = $patientService;
     }
+    // переход на страницу добавления данных
     public function index() : object
     {
         $patients = Patient::all();
-        return view('home', compact('patients'));
+        return view('log')->with('patients', $patients);
     }
 
     public function store(Request $request) : object

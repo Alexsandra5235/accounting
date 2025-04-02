@@ -52,7 +52,7 @@
                         </button>
                     </div>
                 </form>
-                <a class="me-4 py-2 link-body-emphasis text-decoration-none top-50" href="/sign">Добавить пациента</a>
+                <a class="me-4 py-2 link-body-emphasis text-decoration-none top-50" href="{{ route('log.add') }}">Добавить пациента</a>
                 <a class="me-4 py-2 link-body-emphasis text-decoration-none" href="/register">Справочная информация</a>
                 <div class="dropdown py-2 me-4">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
