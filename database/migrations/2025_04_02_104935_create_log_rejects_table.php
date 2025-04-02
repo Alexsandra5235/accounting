@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('log_rejects', function (Blueprint $table) {
             $table->id();
-            $table->string('reason_refusal');
-            $table->string('name_medical_worker');
+            $table->string('reason_refusal')->nullable();
+            $table->string('name_medical_worker')->nullable();
             $table->text('add_info')->nullable();
             $table->timestamps();
         });
