@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
+            $table->foreignId('log_receipt_id')->constrained('log_receipts')->onDelete('cascade');
+            $table->foreignId('log_discharge_id')->constrained('log_discharges')->onDelete('cascade');
+            $table->foreignId('log_reject_id')->constrained('log_rejects')->onDelete('cascade');
             $table->timestamps();
         });
     }
