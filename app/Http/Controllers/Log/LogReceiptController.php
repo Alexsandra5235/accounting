@@ -16,47 +16,44 @@ class LogReceiptController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request) : object
+    public function store(Request $request) : void
     {
         $validatedData = $request->validate([
             'date_receipt' => 'required|date',
-            'datetime_alcohol' => 'date',
             'time_receipt' => 'required|string',
-            'phone_agent' => 'string',
-            'delivered' => 'string',
-            'fact_alcohol' => 'string',
-            'result_research' => 'string',
-            'section_medical' => 'string',
+            'datetime_alcohol' => 'nullable|date',
+            'phone_agent' => 'nullable|string',
+            'delivered' => 'nullable|string',
+            'fact_alcohol' => 'nullable|string',
+            'result_research' => 'nullable|string',
+            'section_medical' => 'nullable|string',
         ]);
 
         LogReceipt::query()->create($validatedData);
 
-        return redirect()->to('/home');
     }
 
-    // Метод для редактирования существующей записи
-    public function update(Request $request, LogReceipt $logReceipt) : object
+    public function update(Request $request, LogReceipt $logReceipt) : void
     {
         $validatedData = $request->validate([
             'date_receipt' => 'sometimes|required|date',
-            'date_time_alcohol' => 'sometimes|required|date',
-            'string_time_receipt' => 'sometimes|required|string',
-            'number_phone_representative' => 'sometimes|required|string',
-            'delivered' => 'sometimes|required|boolean',
-            'fact_alcohol' => 'sometimes|required|string',
-            'result_research' => 'sometimes|required|string',
-            'department_medical_organization' => 'sometimes|required|string',
+            'datetime_alcohol' => 'sometimes|nullable|date',
+            'time_receipt' => 'sometimes|required|string',
+            'phone_agent' => 'sometimes|nullable|string',
+            'delivered' => 'sometimes|nullable|boolean',
+            'fact_alcohol' => 'sometimes|nullable|string',
+            'result_research' => 'sometimes|nullable|string',
+            'section_medical' => 'sometimes|nullable|string',
         ]);
 
         $logReceipt->update($validatedData);
 
-        return redirect()->to('/home');
     }
 
-    public function destroy(LogReceipt $logReceipt) : object
+    public function destroy($id) : void
     {
+        $logReceipt = LogReceipt::all()->findOrFail($id);
         $logReceipt->delete();
 
-        return redirect()->to('/home'); // Возвращаем пустой ответ с кодом 204
     }
 }

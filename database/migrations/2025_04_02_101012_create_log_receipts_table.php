@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('log_receipts', function (Blueprint $table) {
             $table->id();
             $table->date('date_receipt');
-            $table->dateTime('datetime_alcohol');
             $table->string('time_receipt');
-            $table->string('phone_agent');
-            $table->string('delivered');
-            $table->string('fact_alcohol');
-            $table->string('result_research');
-            $table->string('section_medical');
+            $table->dateTime('datetime_alcohol')->nullable();
+            $table->string('phone_agent')->nullable();
+            $table->string('delivered')->nullable();
+            $table->string('fact_alcohol')->nullable();
+            $table->string('result_research')->nullable();
+            $table->string('section_medical')->nullable();
             $table->timestamps();
         });
     }
