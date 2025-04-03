@@ -2,6 +2,7 @@
 
 namespace App\Services\Log;
 
+use App\Models\Log\Log;
 use App\Models\Log\LogDischarge;
 use App\Models\Log\LogReject;
 use Illuminate\Http\Request;
@@ -20,6 +21,10 @@ class LogRejectService
     {
         $validatedData = $this->validate($request);
         return LogReject::query()->create($validatedData);
-
+    }
+    public function update(Request $request, Log $log) : void
+    {
+        $validatedData = $this->validate($request);
+        $log->logReject()->update($validatedData);
     }
 }

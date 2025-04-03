@@ -18,6 +18,7 @@
                 <p class="card-text mb-1">Дата и время создания записи: {{ $log->created_at }}</p>
 
                 <p class="card-text mb-1" style="margin-bottom: 8px">Дата и время последнего редактирования записи: {{ $log->created_at }}</p>
+                <a class="btn btn-primary" href="{{ route('log.edit', ['id'=>$log->id]) }}">Редактировать запись</a>
              </div>
         </div>
     </div>

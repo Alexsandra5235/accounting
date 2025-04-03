@@ -2,6 +2,7 @@
 
 namespace App\Services\Log;
 
+use App\Models\Log\Log;
 use App\Models\Log\LogReceipt;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,12 @@ class LogReceiptService
     }
     public function store(Request $request) : LogReceipt
     {
-
         $validatedData = $this->validate($request);
-
         return LogReceipt::query()->create($validatedData);
+    }
+    public function update(Request $request, Log $log) : void
+    {
+        $validatedData = $this->validate($request);
+        $log->logReceipt()->update($validatedData);
     }
 }

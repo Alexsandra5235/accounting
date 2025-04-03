@@ -144,10 +144,10 @@
                 <label class="form-label" for="delivered">Пациент доставлен (направлен)</label>
                 <select class="form-select mb-4" name="delivered" id="delivered" size="1">
                     <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                    <option value="полицией" {{ old('delivered' == 'полицией' ? 'selected' : '') }}>полицией</option>
-                    <option value="выездной бригадой скорой медицинской помощи" {{ old('delivered' == 'выездной бригадой скорой медицинской помощи' ? 'selected' : '') }}>бригадой скорой медицинской помощи </option>
-                    <option value="другой медицинской организацией" {{ old('delivered' == 'другой медицинской организацией' ? 'selected' : '') }}>бригадой скорой медицинской помощи </option>
-                    <option value="обратился самостоятельно" {{ old('delivered' == 'обратился самостоятельно' ? 'selected' : '') }}>бригадой скорой медицинской помощи </option>
+                    <option value="полицией" {{ old('delivered') == 'полицией' ? 'selected' : '' }}>полицией</option>
+                    <option value="выездной бригадой скорой медицинской помощи" {{ old('delivered') == 'выездной бригадой скорой медицинской помощи' ? 'selected' : '' }}>бригадой скорой медицинской помощи</option>
+                    <option value="другой медицинской организацией" {{ old('delivered') == 'другой медицинской организацией' ? 'selected' : '' }}>другой медицинской организацией</option>
+                    <option value="обратился самостоятельно" {{ old('delivered') == 'обратился самостоятельно' ? 'selected' : '' }}>обратился самостоятельно</option>
                 </select>
 
                 <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
@@ -167,9 +167,9 @@
                 <label class="form-label" for="outcome">Исход госпитализации</label>
                 <select class="form-select mb-4" name="outcome" id="outcome" size="1">
                     <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                    <option value="выписан" {{ old('outcome' == 'выписан' ? 'selected' : '') }}>умер</option>
-                    <option value="переведен в другую медицинскую организацию" {{ old('outcome' == 'переведен в другую медицинскую организацию' ? 'selected' : '') }}>умер</option>
-                    <option value="умер" {{ old('outcome' == 'умер' ? 'selected' : '') }}>умер</option>
+                    <option value="выписан" {{ old('outcome') == 'выписан' ? 'selected' : '' }}>выписан</option>
+                    <option value="переведен в другую медицинскую организацию" {{ old('outcome') == 'переведен в другую медицинскую организацию' ? 'selected' : '' }}>переведен в другую медицинскую организацию</option>
+                    <option value="умер" {{ old('outcome') == 'умер' ? 'selected' : '' }}>умер</option>
                 </select>
 
                 <label class="form-label" for="datetime_discharge">Дата и время исхода</label>
@@ -189,11 +189,11 @@
                 <label class="form-label" for="reason_refusal">Причина отказа в госпитализации</label>
                 <select class="form-select mb-4" name="reason_refusal" id="reason_refusal" size="1">
                     <option value="" selected style="font-weight: bold"> Пожалуйста, сделайте выбор...</option>
-                    <option value="отказался пациент" {{ old('reason_refusal' == 'отказался пациент' ? 'selected' : '') }}>устал</option>
-                    <option value="отсутствие показаний" {{ old('reason_refusal' == 'отсутствие показаний' ? 'selected' : '') }}>устал</option>
-                    <option value="помощь оказана в приемном отделении медицинской организации" {{ old('reason_refusal' == 'помощь оказана в приемном отделении медицинской организации' ? 'selected' : '') }}>устал</option>
-                    <option value="направлен в другую медицинскую организацию" {{ old('reason_refusal' == 'направлен в другую медицинскую организацию' ? 'selected' : '') }}>устал</option>
-                    <option value="иная причина" {{ old('reason_refusal' == 'иная причина' ? 'selected' : '') }}>устал</option>
+                    <option value="отказался пациент" {{ old('reason_refusal') == 'отказался пациент' ? 'selected' : '' }}>отказался пациент</option>
+                    <option value="отсутствие показаний" {{ old('reason_refusal') == 'отсутствие показаний' ? 'selected' : '' }}>отсутствие показаний</option>
+                    <option value="помощь оказана в приемном отделении медицинской организации" {{ old('reason_refusal') == 'помощь оказана в приемном отделении медицинской организации' ? 'selected' : '' }}>помощь оказана в приемном отделении медицинской организации</option>
+                    <option value="направлен в другую медицинскую организацию" {{ old('reason_refusal') == 'направлен в другую медицинскую организацию' ? 'selected' : '' }}>направлен в другую медицинскую организацию</option>
+                    <option value="иная причина" {{ old('reason_refusal' == 'иная причина' ? 'selected' : '') }}>иная причина</option>
                 </select>
 
                 <label class="form-label" for="name_medical_worker">Фамилия, имя, отчество (при наличии) медицинского работника,

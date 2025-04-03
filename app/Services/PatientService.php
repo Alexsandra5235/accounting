@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Log\Log;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,12 @@ class PatientService
     public function store(Request $request) : Patient
     {
         $validatedData = $this->validate($request);
-
         return Patient::query()->create($validatedData);
+    }
+    public function update(Request $request, Log $log) : void
+    {
+        $validatedData = $this->validate($request);
+        $log->patient()->update($validatedData);
     }
 
 }

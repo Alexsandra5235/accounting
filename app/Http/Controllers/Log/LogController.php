@@ -10,6 +10,7 @@ use App\Services\Log\LogReceiptService;
 use App\Services\Log\LogRejectService;
 use App\Services\Log\LogService;
 use App\Services\PatientService;
+use http\Exception\BadConversionException;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -28,25 +29,26 @@ class LogController extends Controller
     public function store(Request $request) : object
     {
         $log = $this->logService->store($request);
-        if($log == null) return redirect()->back()->withErrors(['save_error' => 'Не удалось сохранить данные. Пожалуйста, попробуйте еще раз.']);
+        if($log == null) return redirect()
+            ->back()
+            ->withErrors(['save_error' => 'Не удалось сохранить данные. Пожалуйста, попробуйте еще раз.']);
 
         return redirect()->to('/home');
     }
 
     public function update(Request $request, $id) : object
     {
-        $log = Log::all()->findOrFail($id);
+        $beforeLog = Log::query()->findOrFail($id);
+        $log = $this->logService->update($request, $beforeLog);
 
-        $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'log_receipt_id' => 'required|exists:log_receipts,id',
-            'log_discharge_id' => 'nullable|exists:log_discharges,id',
-            'log_reject_id' => 'nullable|exists:log_rejects,id',
-        ]);
-
-        $log->update($request->all());
+        if($log == null) return redirect()->back()
+            ->withErrors(['save_error' => 'Не удалось обновить данные. Пожалуйста, попробуйте еще раз.']);
 
         return redirect()->to('/home');
+    }
+    public function edit($id) : object
+    {
+        return view('logEdit')->with('log', Log::query()->findOrFail($id));
     }
 
     public function destroy($id) : object

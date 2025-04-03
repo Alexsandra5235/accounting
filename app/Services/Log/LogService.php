@@ -39,7 +39,21 @@ class LogService
                 ]);
             });
         } catch (Exception $e) {
+            return null;
+        }
+    }
+    public function update($request, $log) : Log | null
+    {
+        try {
+            return DB::transaction(function () use ($request, $log) {
+                $this->logReceiptService->update($request, $log);
+                $this->logDischargeService->update($request, $log);
+                $this->logRejectService->update($request, $log);
+                $this->patientService->update($request, $log);
+                return $log;
+            });
 
+        } catch (Exception $e){
             return null;
         }
     }
