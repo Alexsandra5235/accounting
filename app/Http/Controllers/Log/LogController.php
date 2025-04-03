@@ -64,10 +64,4 @@ class LogController extends Controller
         return view('log');
     }
 
-//    public function show($id)
-//    {
-//        $log = Log::findOrFail($id);
-//        return response()->json($log);
-//    }
-
 }
