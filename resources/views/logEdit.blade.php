@@ -11,9 +11,9 @@
                 <div class="card">
                     <div class="card_body">
                         <div class="card-header">
-                            <p>Ошибка данных</p>
+                            Ошибка данных
                         </div>
-                    {{ $errors->first('save_error') }}
+                        {{ $errors->first('save_error') }}
                     </div>
                 </div>
             @elseif($errors->any())
@@ -45,7 +45,7 @@
                     </a>
                 </label><br>
                 <input class="form-control mb-4" type="date" name="date_receipt" id="date_receipt"
-                        value="{{ date('Y-m-d') }}">
+                       value="{{ date('Y-m-d') }}">
 
                 <label class="form-label" for="time_receipt">Время поступления
                     <a href="#" style="text-decoration: none"
@@ -146,6 +146,8 @@
                     <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
                     <option value="полицией" {{ old('delivered' == 'полицией' ? 'selected' : '') }}>полицией</option>
                     <option value="выездной бригадой скорой медицинской помощи" {{ old('delivered' == 'выездной бригадой скорой медицинской помощи' ? 'selected' : '') }}>бригадой скорой медицинской помощи </option>
+                    <option value="другой медицинской организацией" {{ old('delivered' == 'другой медицинской организацией' ? 'selected' : '') }}>полицией</option>
+                    <option value="обратился самостоятельно" {{ old('delivered' == 'обратился самостоятельно' ? 'selected' : '') }}>полицией</option>
                 </select>
 
                 <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
@@ -165,8 +167,9 @@
                 <label class="form-label" for="outcome">Исход госпитализации</label>
                 <select class="form-select mb-4" name="outcome" id="outcome" size="1">
                     <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                    <option value="умер" {{ old('outcome' == 'умер' ? 'selected' : '') }}>умер</option>
                     <option value="выписан" {{ old('outcome' == 'выписан' ? 'selected' : '') }}>умер</option>
+                    <option value="переведен в другую медицинскую организацию" {{ old('outcome' == 'переведен в другую медицинскую организацию' ? 'selected' : '') }}>умер</option>
+                    <option value="умер" {{ old('outcome' == 'умер' ? 'selected' : '') }}>умер</option>
 
                 </select>
 
@@ -187,7 +190,11 @@
                 <label class="form-label" for="reason_refusal">Причина отказа в госпитализации</label>
                 <select class="form-select mb-4" name="reason_refusal" id="reason_refusal" size="1">
                     <option value="" selected style="font-weight: bold"> Пожалуйста, сделайте выбор...</option>
-                    <option value="устал" {{ old('reason_refusal' == 'устал' ? 'selected' : '') }}>устал</option>
+                    <option value="отказался пациент" {{ old('reason_refusal' == 'отказался пациент' ? 'selected' : '') }}>устал</option>
+                    <option value="отсутствие показаний" {{ old('reason_refusal' == 'отсутствие показаний' ? 'selected' : '') }}>устал</option>
+                    <option value="помощь оказана в приемном отделении медицинской организации" {{ old('reason_refusal' == 'помощь оказана в приемном отделении медицинской организации' ? 'selected' : '') }}>устал</option>
+                    <option value="направлен в другую медицинскую организацию" {{ old('reason_refusal' == 'направлен в другую медицинскую организацию' ? 'selected' : '') }}>устал</option>
+                    <option value="иная причина" {{ old('reason_refusal' == 'иная причина' ? 'selected' : '') }}>устал</option>
                 </select>
 
                 <label class="form-label" for="name_medical_worker">Фамилия, имя, отчество (при наличии) медицинского работника,
