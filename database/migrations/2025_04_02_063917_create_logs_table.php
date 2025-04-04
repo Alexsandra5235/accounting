@@ -30,7 +30,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-            Schema::create('log_discharges', function (Blueprint $table) {
+        Schema::create('log_discharges', function (Blueprint $table) {
             $table->id();
             $table->foreignId('log_id')->constrained('logs')->onDelete('cascade');
             $table->dateTime('datetime_discharge')->nullable();

@@ -24,8 +24,8 @@ class LogDischarge extends Model
         'datetime_discharge',
         'datetime_inform',
     ];
-    public function log() : BelongsTo
-    {
-        return $this->belongsTo(Log::class);
-    }
+//    public function log() : BelongsTo
+//    {
+//        return $this->belongsTo(Log::class);
+//    }
 }

@@ -6,6 +6,7 @@ use App\Models\Patient;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Log extends Model
 {
@@ -22,18 +23,18 @@ class Log extends Model
         return $this->belongsTo(Patient::class, 'patient_id');
     }
 
-    public function logReceipt() : BelongsTo
+    public function logReceipt(): HasMany
     {
-        return $this->belongsTo(LogReceipt::class, );
+        return $this->hasMany(LogReceipt::class, 'log_id');
     }
 
-    public function logDischarge() : BelongsTo
+    public function logDischarge() : HasMany
     {
-        return $this->belongsTo(LogDischarge::class, );
+        return $this->hasMany(LogDischarge::class, 'log_id');
     }
 
-    public function logReject() : BelongsTo
+    public function logReject() : HasMany
     {
-        return $this->belongsTo(LogReject::class, );
+        return $this->hasMany(LogReject::class);
     }
 }

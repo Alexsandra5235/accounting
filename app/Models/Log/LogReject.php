@@ -16,8 +16,8 @@ class LogReject extends Model
         'name_medical_worker',
         'add_info'
     ];
-    public function log() : BelongsTo
-    {
-        return $this->belongsTo(Log::class);
-    }
+//    public function log() : BelongsTo
+//    {
+//        return $this->belongsTo(Log::class);
+//    }
 }

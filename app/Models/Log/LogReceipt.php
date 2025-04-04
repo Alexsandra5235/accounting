@@ -28,8 +28,9 @@ class LogReceipt extends Model
         'date_receipt',
         'datetime_alcohol'
     ];
-    public function log() : BelongsTo
+
+    public function log(): BelongsTo
     {
-        return $this->belongsTo(Log::class);
+        return $this->belongsTo(Log::class, 'log_id');
     }
 }
