@@ -68,7 +68,7 @@
                             <td>
                                 @if($log->logDischarge->first())
                                     @if($log->logDischarge->first()->outcome != null)
-                                        Пациент {{ $log->logDischarge->outcome }}
+                                        Пациент {{ $log->logDischarge->first()->outcome }}
                                     @endif
                                     {{ $log->logDischarge->first()->datetime_discharge }}
                                     {{ $log->logDischarge->first()->section_transferred }}

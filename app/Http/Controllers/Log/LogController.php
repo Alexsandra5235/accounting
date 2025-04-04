@@ -40,10 +40,11 @@ class LogController extends Controller
 
     public function update(Request $request, $id) : object
     {
+        $this->logService->validate($request);
         $beforeLog = Log::query()->findOrFail($id);
         $log = $this->logService->update($request, $beforeLog);
 
-        if($log::class === Exception::class) return redirect()->back()
+        if($log instanceof Exception) return redirect()->back()
             ->withErrors(['save_error' => "Не удалось обновить данные. Пожалуйста, попробуйте еще раз.
             Исключение: $log"]);
 

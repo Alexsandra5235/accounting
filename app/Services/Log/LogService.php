@@ -52,10 +52,11 @@ class LogService
     {
         try {
             return DB::transaction(function () use ($request, $log) {
+                $this->patientService->update($request, $log);
                 $this->logReceiptService->update($request, $log);
                 $this->logDischargeService->update($request, $log);
                 $this->logRejectService->update($request, $log);
-                $this->patientService->update($request, $log);
+
                 return $log;
             });
 
