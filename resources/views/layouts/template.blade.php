@@ -100,7 +100,55 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+    $(document).ready(function() {
+        $("#example").on('input', function() {
+            let query = $(this).val();
+            $('#suggestions').empty(); // Очистка предыдущих подсказок
+            if (query.length > 2) {
+                $.ajax({
+                    url: 'https://api.gigdata.ru/api/v2/suggest/mkb',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    headers: {
+                        'accept': 'application/json',
+                        'authorization': 'ft7dxehueq4rr9lmq87m2jt8je7trrvws3km03ac', // Замените 'token' на ваш актуальный токен
+                    },
+                    data: JSON.stringify({
+                        query: query,
+                        count: 5
+                    }),
+                    success: function(data) {
+                        if (data.suggestions.length > 0) {
+                            data.suggestions.forEach(function(item) {
+                                const code = item.data.code || "Неизвестный код"; // Проверка на наличие кода
+                                const value = item.value || "Неизвестное значение"; // Проверка на наличие названия
+
+                                let suggestionItem = $('<div class="suggestion-item"></div>');
+                                suggestionItem.text(`${code} - ${value}`);
+                                suggestionItem.on('click', function() {
+                                    $('#example').val(value); // Установить выбранное значение в поле ввода
+                                    $('#suggestions').empty(); // Удалить подсказки
+                                });
+                                $('#suggestions').append(suggestionItem);
+                            });
+                        }
+                    },
+                    error: function(err) {
+                        console.error('Ошибка при обращении к API:', err);
+                    }
+                });
+            }
+        });
+
+        // Закрыть подсказки при клике вне области
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('#example').length) {
+                $('#suggestions').empty();
+            }
+        });
+    });
 
 
 </script>

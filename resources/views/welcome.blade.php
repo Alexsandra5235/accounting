@@ -5,23 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        {{ __('You are logged in!') }}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <h1>Поиск по МКБ-10</h1>
+    <div style="position: relative;">
+        <input type="text" id="example" placeholder="Введите название болезни..." />
+        <div id="suggestions"></div>
     </div>
+
+
 @endsection
