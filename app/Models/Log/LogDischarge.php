@@ -4,6 +4,7 @@ namespace App\Models\Log;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LogDischarge extends Model
 {
@@ -12,6 +13,7 @@ class LogDischarge extends Model
     protected $table = 'log_discharges';
 
     protected $fillable = [
+        'log_id',
         'datetime_discharge',
         'datetime_inform',
         'outcome',
@@ -22,4 +24,8 @@ class LogDischarge extends Model
         'datetime_discharge',
         'datetime_inform',
     ];
+    public function log() : BelongsTo
+    {
+        return $this->belongsTo(Log::class);
+    }
 }

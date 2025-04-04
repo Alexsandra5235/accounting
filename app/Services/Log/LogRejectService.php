@@ -17,10 +17,10 @@ class LogRejectService
             'add_info' => 'nullable|string|max:255',
         ]);
     }
-    public function store(Request $request) : LogReject
+    public function store(Request $request,Log $log) : LogReject
     {
         $validatedData = $this->validate($request);
-        return LogReject::query()->create($validatedData);
+        return LogReject::query()->create(array_merge($validatedData, ['log_id' => $log->id]));
     }
     public function update(Request $request, Log $log) : void
     {

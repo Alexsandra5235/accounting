@@ -4,6 +4,7 @@ namespace App\Models\Log;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LogReceipt extends Model
 {
@@ -12,6 +13,7 @@ class LogReceipt extends Model
     protected $table = 'log_receipts';
 
     protected $fillable = [
+        'log_id',
         'date_receipt',
         'datetime_alcohol',
         'time_receipt',
@@ -26,4 +28,8 @@ class LogReceipt extends Model
         'date_receipt',
         'datetime_alcohol'
     ];
+    public function log() : BelongsTo
+    {
+        return $this->belongsTo(Log::class);
+    }
 }

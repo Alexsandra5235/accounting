@@ -22,24 +22,30 @@ class LogService
         $this->logDischargeService = $logDischargeService;
         $this->logRejectService = $logRejectService;
     }
-    public function store($request) : Log | null
+
+    public function validate(Request $request) : void
+    {
+        $this->patientService->validate($request);
+        $this->logReceiptService->validate($request);
+        $this->logDischargeService->validate($request);
+        $this->logRejectService->validate($request);
+    }
+    public function store($request) : Log | Exception
     {
         try {
             return DB::transaction(function () use ($request) {
                 $patient_id = $this->patientService->store($request)->id;
-                $log_receipt_id = $this->logReceiptService->store($request)->id;
-                $log_discharge_id = $this->logDischargeService->store($request)->id;
-                $log_reject_id = $this->logRejectService->store($request)->id;
-
-                return Log::query()->create([
+                $log = Log::query()->create([
                     'patient_id' => $patient_id,
-                    'log_receipt_id' => $log_receipt_id,
-                    'log_discharge_id' => $log_discharge_id,
-                    'log_reject_id' => $log_reject_id
                 ]);
+                $this->logReceiptService->store($request,$log);
+                $this->logDischargeService->store($request,$log);
+                $this->logRejectService->store($request,$log);
+
+                return $log;
             });
         } catch (Exception $e) {
-            return null;
+            return $e;
         }
     }
     public function update($request, $log) : Log | Exception
@@ -53,6 +59,21 @@ class LogService
                 return $log;
             });
 
+        } catch (Exception $e){
+            return $e;
+        }
+    }
+    public function destroy($id) : null| Exception
+    {
+        try{
+            return DB::transaction(function () use ($id) {
+                $log = Log::query()->findOrFail($id);
+                $log->logReceipt()->delete();
+                $log->logDischarge()->delete();
+                $log->logReject()->delete();
+                $log->patient()->delete();
+                return null;
+            });
         } catch (Exception $e){
             return $e;
         }

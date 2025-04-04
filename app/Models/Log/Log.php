@@ -15,9 +15,6 @@ class Log extends Model
 
     protected $fillable = [
         'patient_id',
-        'log_receipt_id',
-        'log_discharge_id',
-        'log_reject_id',
     ];
 
     public function patient() : BelongsTo
@@ -27,16 +24,16 @@ class Log extends Model
 
     public function logReceipt() : BelongsTo
     {
-        return $this->belongsTo(LogReceipt::class, 'log_receipt_id');
+        return $this->belongsTo(LogReceipt::class, );
     }
 
     public function logDischarge() : BelongsTo
     {
-        return $this->belongsTo(LogDischarge::class, 'log_discharge_id');
+        return $this->belongsTo(LogDischarge::class, );
     }
 
     public function logReject() : BelongsTo
     {
-        return $this->belongsTo(LogReject::class, 'log_reject_id');
+        return $this->belongsTo(LogReject::class, );
     }
 }

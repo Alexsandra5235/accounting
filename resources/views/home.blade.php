@@ -18,6 +18,18 @@
                 При необходимости просмотра полной информации нажмите на соответствующую кнопку.</p>
          </div>
     </div>
+    <div class="container text-white blurBG" style="justify-content: center; width: 50vw; border-radius: 7px">
+        @if ($errors->has('destroy_error'))
+            <div class="card">
+                <div class="card_body">
+                    <div class="card-header">
+                        <p>Ошибка данных</p>
+                    </div>
+                    <p>{{ $errors->first('destroy_error') }}</p>
+                </div>
+            </div>
+        @endif
+    </div>
 
     <div class="container">
 

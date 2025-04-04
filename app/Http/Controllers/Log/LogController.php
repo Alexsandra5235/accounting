@@ -29,10 +29,11 @@ class LogController extends Controller
 
     public function store(Request $request) : object
     {
+        $this->logService->validate($request);
         $log = $this->logService->store($request);
-        if($log == null) return redirect()
+        if($log instanceof Exception) return redirect()
             ->back()
-            ->withErrors(['save_error' => 'Не удалось сохранить данные. Пожалуйста, попробуйте еще раз.']);
+            ->withErrors(['save_error' => "Не удалось сохранить данные. Пожалуйста, попробуйте еще раз. Исключение: $log"]);
 
         return redirect()->to('/home');
     }
@@ -55,10 +56,10 @@ class LogController extends Controller
 
     public function destroy($id) : object
     {
-        $log = Log::all()->findOrFail($id);
-        $log->delete();
+        $result = $this->logService->destroy($id);
+        if($result == null) redirect()->to('/home');
 
-        return redirect()->to('/home');
+        return redirect()->to('/home')->withErrors(['destroy_error' => "Не удалось удалить данные. Исключение: $result"]);
     }
 
     public function index() : object

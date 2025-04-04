@@ -18,11 +18,22 @@
                 <p class="card-text mb-1">Дата и время создания записи: {{ $log->created_at }}</p>
 
                 <p class="card-text mb-1" style="margin-bottom: 8px">Дата и время последнего редактирования записи: {{ $log->created_at }}</p>
-                <a class="btn btn-primary" href="{{ route('log.edit', ['id'=>$log->id]) }}">Редактировать запись</a>
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-primary me-4" href="{{ route('log.edit', ['id'=>$log->id]) }}">Редактировать запись</a>
+                    </div>
+                    <div class="col">
+                        <form action="{{ route('log.destroy',['id'=>$log->id]) }}" method="post">
+                            @method('delete')
+                            @csrf
+                            <input type="submit" class="btn btn-danger" value="Удалить запись">
+                        </form>
+                    </div>
+
+                </div>
              </div>
         </div>
     </div>
-
     <div class="container text-white " style="justify-content: center;">
         <fieldset disabled>
             <div class="container text-left">

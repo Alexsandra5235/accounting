@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('logs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
+            $table->timestamps();
+        });
         Schema::create('log_receipts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('log_id')->constrained()->onDelete('cascade');
             $table->date('date_receipt');
             $table->string('time_receipt');
             $table->dateTime('datetime_alcohol')->nullable();
@@ -24,8 +30,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('log_discharges', function (Blueprint $table) {
+            Schema::create('log_discharges', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('log_id')->constrained('logs')->onDelete('cascade');
             $table->dateTime('datetime_discharge')->nullable();
             $table->dateTime('datetime_inform')->nullable();
             $table->string('outcome')->nullable();
@@ -35,17 +42,10 @@ return new class extends Migration
 
         Schema::create('log_rejects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('log_id')->constrained('logs')->onDelete('cascade');
             $table->string('reason_refusal')->nullable();
             $table->string('name_medical_worker')->nullable();
             $table->text('add_info')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('logs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
-            $table->foreignId('log_receipt_id')->constrained('log_receipts')->onDelete('cascade');
-            $table->foreignId('log_discharge_id')->constrained('log_discharges')->onDelete('cascade');
-            $table->foreignId('log_reject_id')->constrained('log_rejects')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -56,5 +56,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('logs');
+        Schema::dropIfExists('log_rejects');
+        Schema::dropIfExists('log_discharges');
+        Schema::dropIfExists('log_receipts');
     }
 };
