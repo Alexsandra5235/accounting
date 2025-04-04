@@ -19,3 +19,4 @@ Route::get('/log/show/{id}', [LogController::class, 'show'])->name('log.show');
 Route::get('/log/edit/{id}', [LogController::class, 'edit'])->name('log.edit');
 Route::put('/log/update/{id}', [LogController::class, 'update'])->name('log.update');
 Route::delete('/log/destroy/{id}', [LogController::class, 'destroy'])->name('log.destroy');
+Route::get('/search', [LogController::class, 'search'])->name('log.search');

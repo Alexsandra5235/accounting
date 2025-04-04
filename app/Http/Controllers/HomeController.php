@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Log\Log;
 use App\Models\Patient;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Contracts\Support\Renderable;
 
 class HomeController extends Controller

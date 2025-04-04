@@ -70,5 +70,18 @@ class LogController extends Controller
     {
         return view('log');
     }
+    public function search(Request $request) : object
+    {
+        $searchName = $request->input('name');
+        $logs = Log::with('patient')
+            ->when($searchName, function($query) use ($searchName) {
+                $query->whereHas('patient', function($query) use ($searchName) {
+                    $query->where('name', 'like', "%{$searchName}%");
+                });
+            })
+            ->get();
+
+        return view('home')->with('logs', $logs);
+    }
 
 }
