@@ -77,7 +77,7 @@
                 <p id="outcome_hospitalization">Исход госпитализации:
                     <strong style="color: dodgerblue">{{ $log->logDischarge->outcome }}</strong></p>
                 <p id="date_time_discharge">Дата и время исхода:
-                    <strong style="color: dodgerblue">{{ $log->logDischarge->datetime_outcome }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->logDischarge->datetime_discharge }}</strong></p>
                 <p id="medical_organization_transferred">Наименование медицинской организации,
                     куда переведен пациент:
                     <strong style="color: dodgerblue">{{ $log->logDischarge->section_transferred }}</strong></p>

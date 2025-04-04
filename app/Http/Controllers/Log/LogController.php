@@ -10,6 +10,7 @@ use App\Services\Log\LogReceiptService;
 use App\Services\Log\LogRejectService;
 use App\Services\Log\LogService;
 use App\Services\PatientService;
+use Exception;
 use http\Exception\BadConversionException;
 use Illuminate\Http\Request;
 
@@ -41,8 +42,9 @@ class LogController extends Controller
         $beforeLog = Log::query()->findOrFail($id);
         $log = $this->logService->update($request, $beforeLog);
 
-        if($log == null) return redirect()->back()
-            ->withErrors(['save_error' => 'Не удалось обновить данные. Пожалуйста, попробуйте еще раз.']);
+        if($log::class === Exception::class) return redirect()->back()
+            ->withErrors(['save_error' => "Не удалось обновить данные. Пожалуйста, попробуйте еще раз.
+            Исключение: $log"]);
 
         return redirect()->to('/home');
     }

@@ -42,7 +42,7 @@ class LogService
             return null;
         }
     }
-    public function update($request, $log) : Log | null
+    public function update($request, $log) : Log | Exception
     {
         try {
             return DB::transaction(function () use ($request, $log) {
@@ -54,7 +54,7 @@ class LogService
             });
 
         } catch (Exception $e){
-            return null;
+            return $e;
         }
     }
 }
