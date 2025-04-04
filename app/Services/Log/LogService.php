@@ -64,14 +64,11 @@ class LogService
             return $e;
         }
     }
-    public function destroy($id) : null| Exception
+    public function destroy($id) : null | Exception
     {
         try{
             return DB::transaction(function () use ($id) {
                 $log = Log::query()->findOrFail($id);
-                $log->logReceipt()->delete();
-                $log->logDischarge()->delete();
-                $log->logReject()->delete();
                 $log->patient()->delete();
                 return null;
             });

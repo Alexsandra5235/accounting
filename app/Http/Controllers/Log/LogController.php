@@ -58,9 +58,12 @@ class LogController extends Controller
     public function destroy($id) : object
     {
         $result = $this->logService->destroy($id);
-        if($result == null) redirect()->to('/home');
+        if($result instanceof Exception) return redirect()->to('/home')
+            ->withErrors(['destroy_error' => "Не удалось удалить данные. Исключение: $result"]);
 
-        return redirect()->to('/home')->withErrors(['destroy_error' => "Не удалось удалить данные. Исключение: $result"]);
+
+        return redirect()->to('/home');
+
     }
 
     public function index() : object
