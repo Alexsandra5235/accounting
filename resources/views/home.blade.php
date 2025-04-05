@@ -49,12 +49,12 @@
                 @if($logs)
                     @foreach($logs as $log)
                         <tr>
-                            @if($log->logReceipt)
-                                <td>{{ $log->logReceipt->date_receipt }}</td>
-                                <td> {{ $log->logReceipt->time_receipt }} </td>
+                            @if($log->receipt)
+                                <td>{{ $log->receipt->date_receipt }}</td>
+                                <td> {{ $log->receipt->time_receipt }} </td>
                             @else
-                                <td></td>
-                                <td></td>
+                                <td> - </td>
+                                <td> - </td>
                             @endif
                             @if($log->patient)
                                 <td>{{ $log->patient->name }}</td>
@@ -66,12 +66,12 @@
                                 <td></td>
                             @endif
                             <td>
-                                @if($log->logDischarge)
-                                    @if($log->logDischarge->outcome != null)
-                                        Пациент {{ $log->logDischarge->outcome }}
+                                @if($log->discharge)
+                                    @if($log->discharge->outcome != null)
+                                        Пациент {{ $log->discharge->outcome }}
                                     @endif
-                                    {{ $log->logDischarge->datetime_discharge }}
-                                    {{ $log->logDischarge->section_transferred }}
+                                    {{ $log->discharge->datetime_discharge }}
+                                    {{ $log->discharge->section_transferred }}
                                 @endif
                             </td>
                             <td>
