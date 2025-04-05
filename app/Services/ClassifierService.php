@@ -8,32 +8,43 @@ use Illuminate\Http\Request;
 
 class ClassifierService
 {
+    public function validate(Request $request): array
+    {
+        return $request->validate([
+            'state_code' => 'nullable',
+            'state_value' => 'nullable',
+            'wound_code' => 'nullable',
+            'wound_value' => 'nullable',
+        ]);
+    }
     public function storeState(Request $request) : Classifier
     {
-        return Classifier::query()->create([
-            'code' => $request->input('state_code'),
-            'value' => $request->input('state_value'),
-            ]);
+        $validatedData = $this->validate($request);
+        return Classifier::query()->create($validatedData);
     }
     public function storeWound(Request $request) : Classifier
     {
-        return Classifier::query()->create([
-            'code' => $request->input('wound_code'),
-            'value' => $request->input('wound_value'),
-        ]);
+        $validatedData = $this->validate($request);
+        return Classifier::query()->create($validatedData);
     }
     public function updateState(Request $request, Log $log) : Classifier
     {
-        return $log->patient()->diagnosis()->state()->update([
-            'code' => $request->input('state_code'),
-            'value' => $request->input('state_value'),
-        ]);
+        $validatedData = $this->validate($request);
+        $log->patient->diagnosis->state->code = $validatedData['state_code'];
+        $log->patient->diagnosis->state->value = $validatedData['state_value'];
+        $log->patient->diagnosis->state->save();
+
+
+        return $log->patient->diagnosis->state;
+
     }
     public function updateWound(Request $request, Log $log) : Classifier
     {
-        return $log->patient->diagnosis->wound()->update([
-            'code' => $request->input('wound_code'),
-            'value' => $request->input('wound_value'),
-        ]);
+        $validatedData = $this->validate($request);
+        $log->patient->diagnosis->wound->code = $validatedData['wound_code'];
+        $log->patient->diagnosis->wound->value = $validatedData['wound_value'];
+        $log->patient->diagnosis->wound->save();
+
+        return $log->patient->diagnosis->wound;
     }
 }
