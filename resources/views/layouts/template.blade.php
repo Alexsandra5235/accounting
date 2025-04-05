@@ -110,17 +110,17 @@
             let query = $(this).val();
             $(suggestionsContainerSelector).empty().hide();
             if (query.length >= 2) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $.ajax({
-                    url: 'https://api.gigdata.ru/api/v2/suggest/mkb',
+                    url: '{{ route('api.diagnosis') }}',
                     type: 'POST',
                     contentType: 'application/json',
-                    headers: {
-                        'accept': 'application/json',
-                        'authorization': 'ft7dxehueq4rr9lmq87m2jt8je7trrvws3km03ac',
-                    },
                     data: JSON.stringify({
                         query: query,
-                        count: 10
                     }),
                     success: function(data) {
                         if (data.suggestions.length > 0) {
@@ -141,7 +141,7 @@
                         }
                     },
                     error: function(err) {
-                        console.error('Ошибка при обращении к API:', err);
+                        console.error('Ошибка при обращении к контроллеру:', err);
                     }
                 });
             }

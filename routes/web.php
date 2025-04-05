@@ -3,6 +3,8 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Log\LogController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SuggestionController;
+use App\Services\SuggestionService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +22,4 @@ Route::get('/log/edit/{id}', [LogController::class, 'edit'])->name('log.edit');
 Route::put('/log/update/{id}', [LogController::class, 'update'])->name('log.update');
 Route::delete('/log/destroy/{id}', [LogController::class, 'destroy'])->name('log.destroy');
 Route::get('/search', [LogController::class, 'search'])->name('log.search');
+Route::post('/api/diagnosis', [SuggestionController::class, 'diagnosis'])->name('api.diagnosis');

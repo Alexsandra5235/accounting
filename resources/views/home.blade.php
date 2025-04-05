@@ -6,6 +6,10 @@
 
 @section('content')
     <div class="container">
+        <form action="{{ route('api.diagnosis') }}" method="post">
+            @csrf
+            <input type="submit">
+        </form>
         <div class="container-fluid">
             <h5 class="my-4">Просмотр журнала учета пациентов
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-log-text" viewBox="0 0 16 16">
