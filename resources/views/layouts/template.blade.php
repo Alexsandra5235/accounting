@@ -105,31 +105,31 @@
     $(document).ready(function() {
         $("#example").on('input', function() {
             let query = $(this).val();
-            $('#suggestions').empty(); // Очистка предыдущих подсказок
-            if (query.length > 2) {
+            $('#suggestions').empty();
+            if (query.length >= 2) {
                 $.ajax({
                     url: 'https://api.gigdata.ru/api/v2/suggest/mkb',
                     type: 'POST',
                     contentType: 'application/json',
                     headers: {
                         'accept': 'application/json',
-                        'authorization': 'ft7dxehueq4rr9lmq87m2jt8je7trrvws3km03ac', // Замените 'token' на ваш актуальный токен
+                        'authorization': 'ft7dxehueq4rr9lmq87m2jt8je7trrvws3km03ac',
                     },
                     data: JSON.stringify({
                         query: query,
-                        count: 5
+                        count: 10
                     }),
                     success: function(data) {
                         if (data.suggestions.length > 0) {
                             data.suggestions.forEach(function(item) {
-                                const code = item.data.code || "Неизвестный код"; // Проверка на наличие кода
-                                const value = item.value || "Неизвестное значение"; // Проверка на наличие названия
+                                const code = item.data.code || "Неизвестный код";
+                                const value = item.value || "Неизвестное значение";
 
                                 let suggestionItem = $('<div class="suggestion-item"></div>');
                                 suggestionItem.text(`${code} - ${value}`);
                                 suggestionItem.on('click', function() {
-                                    $('#example').val(value); // Установить выбранное значение в поле ввода
-                                    $('#suggestions').empty(); // Удалить подсказки
+                                    $('#example').val(code);
+                                    $('#suggestions').empty();
                                 });
                                 $('#suggestions').append(suggestionItem);
                             });
@@ -142,7 +142,6 @@
             }
         });
 
-        // Закрыть подсказки при клике вне области
         $(document).on('click', function(e) {
             if (!$(e.target).closest('#example').length) {
                 $('#suggestions').empty();
