@@ -87,7 +87,7 @@ class LogService
         try{
             return DB::transaction(function () use ($id) {
                 $log = Log::query()->findOrFail($id);
-                $log->patient()->delete();
+                $log->delete();
                 return null;
             });
         } catch (Exception $e){

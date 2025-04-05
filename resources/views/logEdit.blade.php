@@ -179,7 +179,7 @@
             </label>
             <div class="mb-4 position-relative">
                 <input class="form-control" type="text" id="state_code" name="state_code" value="{{ $log->patient->diagnosis->state->code }}">
-                <input type="text" id="state_value" name="state_value" hidden="hidden">
+                <input type="text" id="state_value" name="state_value" hidden="hidden" value="{{ $log->patient->diagnosis->state->value }}">
                 <div id="suggestions_state" class="dropdown-menu" style="width: 100%"></div>
             </div>
 
@@ -197,7 +197,7 @@
             </label>
             <div class="mb-4 position-relative">
                 <input class="form-control" type="text" id="wound_code" name="wound_code" value="{{ $log->patient->diagnosis->wound->code }}">
-                <input type="text" id="wound_value" name="wound_value" hidden="hidden">
+                <input type="text" id="wound_value" name="wound_value" hidden="hidden" value="{{ $log->patient->diagnosis->wound->value }}">
                 <div id="suggestions_wound" class="dropdown-menu" style="width: 100%"></div>
             </div>
 

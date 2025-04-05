@@ -33,9 +33,9 @@
 
     <div class="container">
 
-        <table class="table table-bordered my-4">
+        <table class="table table-bordered table-hover my-4">
             <thead>
-            <tr>
+            <tr class="table table-active">
                 <td>Дата поступления</td>
                 <td>Время поступления</td>
                 <td>Фамилия, имя, отчество (при наличии)</td>

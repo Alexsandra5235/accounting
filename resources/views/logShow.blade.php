@@ -18,7 +18,8 @@
                 <p class="card-text mb-1">Дата и время создания записи: {{ $log->created_at }}</p>
 
                 <p class="card-text mb-1" style="margin-bottom: 8px">Дата и время последнего редактирования записи: {{ $log->created_at }}</p>
-                <div class="row">
+
+                <div class="row row-cols-auto mt-3">
                     <div class="col">
                         <a class="btn btn-primary me-4" href="{{ route('log.edit', ['id'=>$log->id]) }}">Редактировать запись</a>
                     </div>
@@ -29,7 +30,6 @@
                             <input type="submit" class="btn btn-danger" value="Удалить запись">
                         </form>
                     </div>
-
                 </div>
              </div>
         </div>
