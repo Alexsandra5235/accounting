@@ -14,6 +14,7 @@ class Patient extends Model
     protected $table = 'patients';
 
     protected $fillable = [
+        'diagnosis_id',
         'name',
         'birth_day',
         'gender',
@@ -29,8 +30,8 @@ class Patient extends Model
     protected array $dates = [
         'birth_day'
     ];
-    public function log() : BelongsTo
+    public function diagnosis() : BelongsTo
     {
-        return $this->belongsTo(Log::class);
+        return $this->belongsTo(Diagnosis::class);
     }
 }

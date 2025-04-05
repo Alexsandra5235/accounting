@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classifier extends Model
 {
-    //
+    protected $fillable = ['code','value'];
 }

@@ -11,13 +11,9 @@ class LogReject extends Model
     use HasFactory;
 
     protected $fillable = [
-        'log_id',
         'reason_refusal',
         'name_medical_worker',
         'add_info'
     ];
-//    public function log() : BelongsTo
-//    {
-//        return $this->belongsTo(Log::class);
-//    }
+
 }

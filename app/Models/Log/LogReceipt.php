@@ -13,7 +13,6 @@ class LogReceipt extends Model
     protected $table = 'log_receipts';
 
     protected $fillable = [
-        'log_id',
         'date_receipt',
         'datetime_alcohol',
         'time_receipt',
@@ -29,8 +28,4 @@ class LogReceipt extends Model
         'datetime_alcohol'
     ];
 
-    public function log(): BelongsTo
-    {
-        return $this->belongsTo(Log::class, 'log_id');
-    }
 }
