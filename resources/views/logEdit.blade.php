@@ -141,10 +141,10 @@
             <label class="form-label" for="register_place">Регистрация по месту пребывания пациента</label><br>
             <input value="{{ $log->patient->register_place }}" type="text" class="form-control" name="register_place" id="register_place">
             <div id="suggestions-stay" style="margin-top: 0"></div>
-            <label class="mb-4">
+            <label class="mb-4" for="register_place">
                 <input type="checkbox" class="custom-checkbox" value="Совпадает с местом регистрации">
                 Совпадает с местом регистрации
-            </label>
+            </label><br>
 
             <label class="form-label" for="phone_agent">Номер телефона законного представителя, лица, которому может
                 быть передана информация о состоянии здоровья пациента</label>
@@ -177,9 +177,11 @@
                     </svg>
                 </a>
             </label>
-            <input class="form-control mb-4" type="text" id="state_code" name="state_code" value="{{ $log->patient->diagnosis->state->code }}">
-            <input type="text" id="state_value" name="state_value" hidden="hidden">
-            <div id="suggestions_state"></div>
+            <div class="mb-4 position-relative">
+                <input class="form-control" type="text" id="state_code" name="state_code" value="{{ $log->patient->diagnosis->state->code }}">
+                <input type="text" id="state_value" name="state_value" hidden="hidden">
+                <div id="suggestions_state" class="dropdown-menu" style="width: 100%"></div>
+            </div>
 
             <label class="form-label" for="wound_code">Причина и обстоятельства травмы (в том числе при дорожно-транспортных проишествиях)
                 отравления (код по МКБ)
@@ -193,9 +195,11 @@
                     </svg>
                 </a>
             </label>
-            <input class="form-control mb-4" type="text" id="wound_code" name="wound_code" value="{{ $log->patient->diagnosis->wound->code }}">
-            <input type="text" id="wound_value" name="wound_value" hidden="hidden">
-            <div id="suggestions_wound"></div>
+            <div class="mb-4 position-relative">
+                <input class="form-control" type="text" id="wound_code" name="wound_code" value="{{ $log->patient->diagnosis->wound->code }}">
+                <input type="text" id="wound_value" name="wound_value" hidden="hidden">
+                <div id="suggestions_wound" class="dropdown-menu" style="width: 100%"></div>
+            </div>
 
             <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
                 установление наличия или отсутствия признаков состояния опьянения при поступлении пациента

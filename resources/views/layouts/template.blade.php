@@ -13,7 +13,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <style>
-
+        #suggestions_state, #suggestions_wound {
+            max-height: 150px;
+            overflow-y: auto;
+        }
     </style>
 
 </head>
@@ -102,10 +105,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $("#example").on('input', function() {
+    function setupSuggestions(inputSelector, suggestionsContainerSelector, valueSelector) {
+        $(inputSelector).on('input', function() {
             let query = $(this).val();
-            $('#suggestions').empty();
+            $(suggestionsContainerSelector).empty().hide();
             if (query.length >= 2) {
                 $.ajax({
                     url: 'https://api.gigdata.ru/api/v2/suggest/mkb',
@@ -125,14 +128,16 @@
                                 const code = item.data.code || "Неизвестный код";
                                 const value = item.value || "Неизвестное значение";
 
-                                let suggestionItem = $('<div class="suggestion-item"></div>');
+                                let suggestionItem = $('<button class="dropdown-item suggestion-item"></button>');
                                 suggestionItem.text(`${code} - ${value}`);
                                 suggestionItem.on('click', function() {
-                                    $('#example').val(code);
-                                    $('#suggestions').empty();
+                                    $(inputSelector).val(code);
+                                    $(valueSelector).val(value);
+                                    $(suggestionsContainerSelector).empty().hide();
                                 });
-                                $('#suggestions').append(suggestionItem);
+                                $(suggestionsContainerSelector).append(suggestionItem);
                             });
+                            $(suggestionsContainerSelector).show();
                         }
                     },
                     error: function(err) {
@@ -143,11 +148,15 @@
         });
 
         $(document).on('click', function(e) {
-            if (!$(e.target).closest('#example').length) {
-                $('#suggestions').empty();
+            if (!$(e.target).closest(inputSelector).length) {
+                $(suggestionsContainerSelector).empty().hide();
             }
         });
-    });
+    }
+
+    setupSuggestions('#state_code', '#suggestions_state', '#state_value');
+
+    setupSuggestions('#wound_code', '#suggestions_wound', '#wound_value');
 
 
 </script>

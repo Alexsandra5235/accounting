@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <div class="container text-white blurBG" style="justify-content: center; width: 50vw; border-radius: 7px">
+        <div class="container text-white ">
             @if ($errors->has('save_error'))
                 <div class="card">
                     <div class="card_body">
@@ -162,9 +162,11 @@
                         </svg>
                     </a>
                 </label>
-                <input class="form-control mb-4" type="text" id="state_code" name="state_code">
-                <input type="text" id="state_value" name="state_value" style="visibility: hidden">
-                <div id="suggestions_state"></div>
+                <div class="mb-4 position-relative">
+                    <input class="form-control" type="text" id="state_code" name="state_code">
+                    <input type="text" id="state_value" name="state_value" hidden="hidden">
+                    <div id="suggestions_state" class="dropdown-menu" style="width: 100%"></div>
+                </div>
 
                 <label class="form-label" for="wound_code">Причина и обстоятельства травмы (в том числе при дорожно-транспортных проишествиях)
                     отравления (код по МКБ)
@@ -178,9 +180,11 @@
                         </svg>
                     </a>
                 </label>
-                <input class="form-control mb-4" type="text" id="wound_code" name="wound_code">
-                <input type="text" id="wound_value" name="wound_value" style="visibility: hidden">
-                <div id="suggestions_wound"></div>
+                <div class="mb-4 position-relative">
+                    <input class="form-control" type="text" id="wound_code" name="wound_code">
+                    <input type="text" id="wound_value" name="wound_value" hidden="hidden">
+                    <div id="suggestions_wound" class="dropdown-menu" style="width: 100%"></div>
+                </div>
 
                 <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
                     установление наличия или отсутствия признаков состояния опьянения при поступлении пациента

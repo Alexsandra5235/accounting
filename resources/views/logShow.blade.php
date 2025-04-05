@@ -74,13 +74,17 @@
                 <p id="delivered">Пациент доставлен (направлен):
                     <strong style="color: dodgerblue">{{ $log->receipt->delivered }}</strong></p>
 
-                <p>Диагноз заболевания (состояния), поставленный направившей медицинской организацией,<br>
+                <p>Диагноз заболевания (состояния), поставленный направившей медицинской организацией,
                     выездной бригадой скорой медицинской помощи (код по МКБ):
-                    <strong style="color: dodgerblue">{{ $log->patient->diagnosis->state->code }}</strong></p>
+                    <strong style="color: dodgerblue">
+                        {{ $log->patient->diagnosis->state->code }} - {{ $log->patient->diagnosis->state->value }}
+                    </strong></p>
 
                 <p>Причина и обстоятельства травмы (в том числе при дорожно-транспортных проишествиях)
                     отравления (код по МКБ):
-                    <strong style="color: dodgerblue">{{ $log->patient->diagnosis->wound->code }}</strong></p>
+                    <strong style="color: dodgerblue">
+                        {{ $log->patient->diagnosis->wound->code }} - {{ $log->patient->diagnosis->wound->value }}
+                    </strong></p>
 
                 <p id="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
                     установление наличия или отсутствия признаков состояния опьянения при поступлении пациента
