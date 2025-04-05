@@ -29,6 +29,6 @@ class LogReceiptService
     public function update(Request $request, Log $log) : void
     {
         $validatedData = $this->validate($request);
-        $log->logReceipt()->update($validatedData);
+        $log->receipt()->update($validatedData);
     }
 }

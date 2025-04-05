@@ -63,10 +63,13 @@ class LogService
             return $e;
         }
     }
-    public function update($request, $log) : Log | Exception
+    public function update(Request $request, Log $log) : Log | Exception
     {
         try {
             return DB::transaction(function () use ($request, $log) {
+
+//                $this->classifierService->updateState($request, $log);
+//                $this->classifierService->updateWound($request, $log);
                 $this->patientService->update($request, $log);
                 $this->logReceiptService->update($request, $log);
                 $this->logDischargeService->update($request, $log);

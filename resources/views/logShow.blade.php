@@ -41,9 +41,9 @@
                 <hr>
 
                 <p id="date_receipt">Дата поступления:
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->date_receipt }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->date_receipt }}</strong></p>
                 <p id="string_time_receipt">Время поступления:
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->time_receipt }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->time_receipt }}</strong></p>
                 <hr>
 
                 <p id="full_name">Фамилия, имя, отчество (при наличии):
@@ -70,41 +70,41 @@
                 <hr>
                 <p id="number_phone_representative">Номер телефона законного представителя, лица, которому может
                     быть передана информация о состоянии здоровья пациента:
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->phone_agent }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->phone_agent }}</strong></p>
                 <p id="delivered">Пациент доставлен (направлен):
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->delivered }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->delivered }}</strong></p>
                 <p id="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
                     установление наличия или отсутствия признаков состояния опьянения при поступлении пациента
                     в медицинскую организацию:
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->fact_alcohol }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->fact_alcohol }}</strong></p>
                 <p id="date_time_alcohol">Дата и время взятия пробы:
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->datetime_alcohol }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->datetime_alcohol }}</strong></p>
                 <p id="result_research">Результаты лабораторных исследований:
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->result_research }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->result_research }}</strong></p>
                 <p id="department_medical_organization">Отделение медицинской организации, в которое
                     направлен пациент:
-                    <strong style="color: dodgerblue">{{ $log->logReceipt->first()->section_medical }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->receipt->section_medical }}</strong></p>
                 <hr>
                 <p id="outcome_hospitalization">Исход госпитализации:
-                    <strong style="color: dodgerblue">{{ $log->logDischarge->first()->outcome }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->discharge->outcome }}</strong></p>
                 <p id="date_time_discharge">Дата и время исхода:
-                    <strong style="color: dodgerblue">{{ $log->logDischarge->first()->datetime_discharge }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->discharge->datetime_discharge }}</strong></p>
                 <p id="medical_organization_transferred">Наименование медицинской организации,
                     куда переведен пациент:
-                    <strong style="color: dodgerblue">{{ $log->logDischarge->first()->section_transferred }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->discharge->section_transferred }}</strong></p>
                 <p id="date_time_inform">Дата и время сообщения законному представителю, иному лицу
                     или медицинской организации, направившей пациента, о госпитализации (отказе в госпитализации) пациента,
                     ее исходе:
-                    <strong style="color: dodgerblue">{{ $log->logDischarge->first()->datetime_inform }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->discharge->datetime_inform }}</strong></p>
                 <hr>
                 <h4> В случае отказа в госпитализации в стационар, дневной стационар</h4>
                 <p id="reason_refusal">Причина отказа в госпитализации:
-                    <strong style="color: dodgerblue">{{ $log->logReject->first()->reason_refusal }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->reject->reason_refusal }}</strong></p>
                 <p id="full_name_medical_worker">Фамилия, имя, отчество (при наличии) медицинского
                     работника, зафиксировавшего причину отказа в госпитализации:
-                    <strong style="color: dodgerblue">{{ $log->logReject->first()->name_medical_worker }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->reject->name_medical_worker }}</strong></p>
                 <p id="additional_information">Дополнительные сведения:
-                    <strong style="color: dodgerblue">{{ $log->logReject->first()->add_info }}</strong></p>
+                    <strong style="color: dodgerblue">{{ $log->reject->add_info }}</strong></p>
             </div>
         </fieldset>
     </div>

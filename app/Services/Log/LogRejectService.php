@@ -25,6 +25,6 @@ class LogRejectService
     public function update(Request $request, Log $log) : void
     {
         $validatedData = $this->validate($request);
-        $log->logReject()->update($validatedData);
+        $log->reject()->update($validatedData);
     }
 }

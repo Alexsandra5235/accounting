@@ -60,7 +60,7 @@
                 </a>
             </label><br>
             <input class="form-control mb-4" type="date" name="date_receipt" id="date_receipt"
-                   value="{{ $log->logReceipt->first()->date_receipt }}">
+                   value="{{ $log->receipt->date_receipt }}">
 
             <label class="form-label" for="time_receipt">Время поступления
                 <a href="#" style="text-decoration: none"
@@ -73,7 +73,7 @@
                 </a>
             </label><br>
             <input class="form-control mb-4" type="time" name="time_receipt" id="time_receipt" maxlength="5"
-                   value="{{ $log->logReceipt->first()->time_receipt }}">
+                   value="{{ $log->receipt->time_receipt }}">
 
             <label class="form-label" for="name">Фамилия, имя, отчество (при наличии)
                 <a href="#" style="text-decoration: none"
@@ -148,7 +148,7 @@
 
             <label class="form-label" for="phone_agent">Номер телефона законного представителя, лица, которому может
                 быть передана информация о состоянии здоровья пациента</label>
-            <input value="{{ $log->logReceipt->first()->phone_agent }}" class="form-control mb-4" type="text" id="phone_agent" name="phone_agent" maxlength="18" placeholder="8 (XXX) XXX XX XX" autocomplete="off">
+            <input value="{{ $log->receipt->phone_agent }}" class="form-control mb-4" type="text" id="phone_agent" name="phone_agent" maxlength="18" placeholder="8 (XXX) XXX XX XX" autocomplete="off">
 
             <label class="form-label" for="snils">СНИСЛ (при наличии)</label>
             <input value="{{ $log->patient->snils }}" class="form-control mb-4" type="text" id="snils" name="snils" maxlength="14" placeholder="XXX-XXX-XXX XX" autocomplete="off">
@@ -159,65 +159,65 @@
             <label class="form-label" for="delivered">Пациент доставлен (направлен)</label>
             <select class="form-select mb-4" name="delivered" id="delivered" size="1">
                 <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                <option value="полицией" {{ $log->logReceipt->first()->delivered == 'полицией' ? 'selected' : '' }}> полицией</option>
-                <option value="выездной бригадой скорой медицинской помощи" {{ $log->logReceipt->first()->delivered == 'выездной бригадой скорой медицинской помощи' ? 'selected' : '' }}>выездной бригадой скорой медицинской помощи</option>
-                <option value="другой медицинской организацией" {{ $log->logReceipt->first()->delivered == 'другой медицинской организацией' ? 'selected' : '' }}>другой медицинской организацией</option>
-                <option value="обратился самостоятельно" {{ $log->logReceipt->first()->delivered == 'обратился самостоятельно' ? 'selected' : '' }}>обратился самостоятельно</option>
+                <option value="полицией" {{ $log->receipt->delivered == 'полицией' ? 'selected' : '' }}> полицией</option>
+                <option value="выездной бригадой скорой медицинской помощи" {{ $log->receipt->delivered == 'выездной бригадой скорой медицинской помощи' ? 'selected' : '' }}>выездной бригадой скорой медицинской помощи</option>
+                <option value="другой медицинской организацией" {{ $log->receipt->delivered == 'другой медицинской организацией' ? 'selected' : '' }}>другой медицинской организацией</option>
+                <option value="обратился самостоятельно" {{ $log->receipt->delivered == 'обратился самостоятельно' ? 'selected' : '' }}>обратился самостоятельно</option>
             </select>
 
             <label class="form-label" for="fact_alcohol">Факт употребления алкоголя и иных психоактивных веществ,
                 установление наличия или отсутствия признаков состояния опьянения при поступлении пациента
                 в медицинскую организацию</label>
-            <input value="{{ $log->logReceipt->first()->fact_alcohol }}" class="form-control mb-4" type="text" id="fact_alcohol" name="fact_alcohol" autocomplete="off">
+            <input value="{{ $log->receipt->fact_alcohol }}" class="form-control mb-4" type="text" id="fact_alcohol" name="fact_alcohol" autocomplete="off">
 
             <label class="form-label" for="datetime_alcohol">Дата и время взятия пробы</label>
-            <input value="{{ $log->logReceipt->first()->datetime_alcohol }}" class="form-control mb-4" type="datetime-local" id="datetime_alcohol" name="datetime_alcohol">
+            <input value="{{ $log->receipt->datetime_alcohol }}" class="form-control mb-4" type="datetime-local" id="datetime_alcohol" name="datetime_alcohol">
 
             <label class="form-label" for="result_research">Результаты лабораторных исследований</label>
-            <input value="{{ $log->logReceipt->first()->result_research }}" class="form-control mb-4" type="text" id="result_research" name="result_research">
+            <input value="{{ $log->receipt->result_research }}" class="form-control mb-4" type="text" id="result_research" name="result_research">
 
             <label class="form-label" for="section_medical">Отделение медицинской организации, в которое направлен пациент</label>
-            <input value="{{ $log->logReceipt->first()->section_medical }}" class="form-control mb-4" type="text" id="section_medical" name="section_medical" autocomplete="off">
+            <input value="{{ $log->receipt->section_medical }}" class="form-control mb-4" type="text" id="section_medical" name="section_medical" autocomplete="off">
 
             <label class="form-label" for="outcome">Исход госпитализации</label>
             <select class="form-select mb-4" name="outcome" id="outcome" size="1">
                 <option value="" style="font-weight: bold">Пожалуйста, сделайте выбор</option>
-                <option value="выписан" {{ $log->logDischarge->first()->outcome == 'выписан' ? 'selected' : '' }}>выписан</option>
-                <option value="переведен в другую медицинскую организацию" {{ $log->logDischarge->first()->outcome == 'переведен в другую медицинскую организацию' ? 'selected' : '' }}>переведен в другую медицинскую организацию</option>
-                <option value="умер" {{ $log->logDischarge->first()->outcome == 'умер' ? 'selected' : '' }}>умер</option>
+                <option value="выписан" {{ $log->discharge->outcome == 'выписан' ? 'selected' : '' }}>выписан</option>
+                <option value="переведен в другую медицинскую организацию" {{ $log->discharge->outcome == 'переведен в другую медицинскую организацию' ? 'selected' : '' }}>переведен в другую медицинскую организацию</option>
+                <option value="умер" {{ $log->discharge->outcome == 'умер' ? 'selected' : '' }}>умер</option>
 
             </select>
 
             <label class="form-label" for="datetime_discharge">Дата и время исхода</label>
-            <input value="{{ $log->logDischarge->first()->datetime_discharge }}" class="form-control mb-4" type="datetime-local" id="datetime_discharge" name="datetime_discharge" autocomplete="off">
+            <input value="{{ $log->discharge->datetime_discharge }}" class="form-control mb-4" type="datetime-local" id="datetime_discharge" name="datetime_discharge" autocomplete="off">
 
             <div id="medicalOrgField">
                 <label class="form-label" for="section_transferred">Наименование медицинской организации, куда переведен пациент</label>
-                <input value="{{ $log->logDischarge->first()->section_transferred }}" class="form-control mb-4" type="text" id="section_transferred" name="section_transferred" autocomplete="off">
+                <input value="{{ $log->discharge->section_transferred }}" class="form-control mb-4" type="text" id="section_transferred" name="section_transferred" autocomplete="off">
             </div>
 
             <label class="form-label" for="datetime_inform"> Дата и время сообщения законному представителю, иному лицу<br>
                 или медицинской организации, направившей пациента, о госпитализации (отказе в госпитализации) пациента, ее исходе</label>
-            <input value="{{ $log->logDischarge->first()->datetime_inform }}" class="form-control mb-4" type="datetime-local" id="datetime_inform" name="datetime_inform" autocomplete="off">
+            <input value="{{ $log->discharge->datetime_inform }}" class="form-control mb-4" type="datetime-local" id="datetime_inform" name="datetime_inform" autocomplete="off">
 
             <h4> В случае отказа в госпитализации в стационар, дневной стационар</h4>
 
             <label class="form-label" for="reason_refusal">Причина отказа в госпитализации</label>
             <select class="form-select mb-4" name="reason_refusal" id="reason_refusal" size="1">
                 <option value="" selected style="font-weight: bold"> Пожалуйста, сделайте выбор...</option>
-                <option value="отказался пациент" {{ $log->logReject->first()->reason_refusal == 'отказался пациент' ? 'selected' : '' }}>отказался пациент</option>
-                <option value="отсутствие показаний" {{ $log->logReject->first()->reason_refusal == 'отсутствие показаний' ? 'selected' : '' }}>отсутствие показаний</option>
-                <option value="помощь оказана в приемном отделении медицинской организации" {{ $log->logReject->first()->reason_refusal == 'помощь оказана в приемном отделении медицинской организации' ? 'selected' : '' }}>помощь оказана в приемном отделении медицинской организации</option>
-                <option value="направлен в другую медицинскую организацию" {{ $log->logReject->first()->reason_refusal == 'направлен в другую медицинскую организацию' ? 'selected' : '' }}>направлен в другую медицинскую организацию</option>
-                <option value="иная причина" {{ $log->logReject->first()->reason_refusal == 'иная причина' ? 'selected' : '' }}>иная причина</option>
+                <option value="отказался пациент" {{ $log->reject->reason_refusal == 'отказался пациент' ? 'selected' : '' }}>отказался пациент</option>
+                <option value="отсутствие показаний" {{ $log->reject->reason_refusal == 'отсутствие показаний' ? 'selected' : '' }}>отсутствие показаний</option>
+                <option value="помощь оказана в приемном отделении медицинской организации" {{ $log->reject->reason_refusal == 'помощь оказана в приемном отделении медицинской организации' ? 'selected' : '' }}>помощь оказана в приемном отделении медицинской организации</option>
+                <option value="направлен в другую медицинскую организацию" {{ $log->reject->reason_refusal == 'направлен в другую медицинскую организацию' ? 'selected' : '' }}>направлен в другую медицинскую организацию</option>
+                <option value="иная причина" {{ $log->reject->reason_refusal == 'иная причина' ? 'selected' : '' }}>иная причина</option>
             </select>
 
             <label class="form-label" for="name_medical_worker">Фамилия, имя, отчество (при наличии) медицинского работника,
                 зафиксировавшего причину отказа в госпитализации</label>
-            <input  value="{{ $log->logReject->first()->name_medical_worker }}" class="form-control mb-4" type="text" id="name_medical_worker" name="name_medical_worker" autocomplete="off" placeholder="Иванов Иван Иванович">
+            <input  value="{{ $log->reject->name_medical_worker }}" class="form-control mb-4" type="text" id="name_medical_worker" name="name_medical_worker" autocomplete="off" placeholder="Иванов Иван Иванович">
 
             <label class="form-label" for="add_info">Дополнительные сведения</label>
-            <input value="{{ $log->logReject->first()->add_info }}" class="form-control mb-4" type="text" id="add_info" name="add_info" autocomplete="off">
+            <input value="{{ $log->reject->add_info }}" class="form-control mb-4" type="text" id="add_info" name="add_info" autocomplete="off">
 
             <input type="submit" value="Изменить данные" class="btn btn-primary">
         </form>

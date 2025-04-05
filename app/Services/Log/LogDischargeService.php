@@ -27,6 +27,6 @@ class LogDischargeService
     public function update(Request $request, Log $log) : void
     {
         $validatedData = $this->validate($request);
-        $log->logDischarge()->update($validatedData);
+        $log->discharge()->update($validatedData);
     }
 }

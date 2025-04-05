@@ -42,6 +42,7 @@ class LogController extends Controller
     {
         $this->logService->validate($request);
         $beforeLog = Log::query()->findOrFail($id);
+
         $log = $this->logService->update($request, $beforeLog);
 
         if($log instanceof Exception) return redirect()->back()
