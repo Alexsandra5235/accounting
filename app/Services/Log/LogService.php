@@ -3,6 +3,8 @@
 namespace App\Services\Log;
 
 use App\Models\Log\Log;
+use App\Services\ClassifierService;
+use App\Services\DiagnosisService;
 use App\Services\PatientService;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,13 +16,18 @@ class LogService
     protected LogReceiptService $logReceiptService;
     protected LogDischargeService $logDischargeService;
     protected LogRejectService $logRejectService;
+    protected ClassifierService $classifierService;
+    protected DiagnosisService $diagnosisService;
     public function __construct(PatientService $patientService, LogReceiptService $logReceiptService,
-                                LogDischargeService $logDischargeService, LogRejectService $logRejectService){
+                                LogDischargeService $logDischargeService, LogRejectService $logRejectService,
+                                ClassifierService $classifierService, DiagnosisService $diagnosisService){
 
         $this->patientService = $patientService;
         $this->logReceiptService = $logReceiptService;
         $this->logDischargeService = $logDischargeService;
         $this->logRejectService = $logRejectService;
+        $this->classifierService = $classifierService;
+        $this->diagnosisService = $diagnosisService;
     }
 
     public function validate(Request $request) : void
@@ -34,15 +41,23 @@ class LogService
     {
         try {
             return DB::transaction(function () use ($request) {
-                $patient_id = $this->patientService->store($request)->id;
-                $log = Log::query()->create([
-                    'patient_id' => $patient_id,
-                ]);
-                $this->logReceiptService->store($request,$log);
-                $this->logDischargeService->store($request,$log);
-                $this->logRejectService->store($request,$log);
+                $state = $this->classifierService->storeState($request);
+                $wound = $this->classifierService->storeWound($request);
+                $diagnosis = $this->diagnosisService->store($state, $wound);
 
-                return $log;
+                $patient = $this->patientService->store($request,$diagnosis);
+
+                $log_receipt = $this->logReceiptService->store($request);
+                $log_discharge = $this->logDischargeService->store($request);
+                $log_reject = $this->logRejectService->store($request);
+
+                return Log::query()->create([
+                    'patient_id' => $patient->id,
+                    'log_receipt_id' => $log_receipt->id,
+                    'log_discharge_id' => $log_discharge->id,
+                    'log_reject_id' => $log_reject->id
+                ]);
+
             });
         } catch (Exception $e) {
             return $e;

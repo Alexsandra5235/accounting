@@ -21,10 +21,10 @@ class LogReceiptService
             'section_medical' => 'nullable|string',
         ]);
     }
-    public function store(Request $request, Log $log) : LogReceipt
+    public function store(Request $request) : LogReceipt
     {
         $validatedData = $this->validate($request);
-        return LogReceipt::query()->create(array_merge($validatedData, ['log_id' => $log->id]));
+        return LogReceipt::query()->create($validatedData);
     }
     public function update(Request $request, Log $log) : void
     {

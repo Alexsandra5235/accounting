@@ -19,10 +19,10 @@ class LogDischargeService
             'section_transferred' => 'nullable|string|max:255',
         ]);
     }
-    public function store(Request $request, Log $log) : LogDischarge
+    public function store(Request $request) : LogDischarge
     {
         $validatedData = $this->validate($request);
-        return LogDischarge::query()->create(array_merge($validatedData, ['log_id' => $log->id]));
+        return LogDischarge::query()->create($validatedData);
     }
     public function update(Request $request, Log $log) : void
     {

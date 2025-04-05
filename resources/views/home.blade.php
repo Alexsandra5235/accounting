@@ -49,9 +49,9 @@
                 @if($logs)
                     @foreach($logs as $log)
                         <tr>
-                            @if($log->logReceipt->first())
-                                <td>{{ $log->logReceipt->first()->date_receipt }}</td>
-                                <td> {{ $log->logReceipt->first()->time_receipt }} </td>
+                            @if($log->logReceipt)
+                                <td>{{ $log->logReceipt->date_receipt }}</td>
+                                <td> {{ $log->logReceipt->time_receipt }} </td>
                             @else
                                 <td></td>
                                 <td></td>
@@ -66,12 +66,12 @@
                                 <td></td>
                             @endif
                             <td>
-                                @if($log->logDischarge->first())
-                                    @if($log->logDischarge->first()->outcome != null)
-                                        Пациент {{ $log->logDischarge->first()->outcome }}
+                                @if($log->logDischarge)
+                                    @if($log->logDischarge->outcome != null)
+                                        Пациент {{ $log->logDischarge->outcome }}
                                     @endif
-                                    {{ $log->logDischarge->first()->datetime_discharge }}
-                                    {{ $log->logDischarge->first()->section_transferred }}
+                                    {{ $log->logDischarge->datetime_discharge }}
+                                    {{ $log->logDischarge->section_transferred }}
                                 @endif
                             </td>
                             <td>

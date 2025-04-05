@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Diagnosis;
 use App\Models\Log\Log;
 use App\Models\Patient;
 use Illuminate\Http\Request;
@@ -23,10 +24,10 @@ class PatientService
             'polis' => 'nullable|string',
         ]);
     }
-    public function store(Request $request) : Patient
+    public function store(Request $request,Diagnosis $diagnosis) : Patient
     {
         $validatedData = $this->validate($request);
-        return Patient::query()->create($validatedData);
+        return Patient::query()->create(array_merge($validatedData, ['diagnosis_id' => $diagnosis->id]));
     }
     public function update(Request $request, Log $log) : void
     {

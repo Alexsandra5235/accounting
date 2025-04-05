@@ -11,7 +11,6 @@ use App\Services\Log\LogRejectService;
 use App\Services\Log\LogService;
 use App\Services\PatientService;
 use Exception;
-use http\Exception\BadConversionException;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -33,7 +32,8 @@ class LogController extends Controller
         $log = $this->logService->store($request);
         if($log instanceof Exception) return redirect()
             ->back()
-            ->withErrors(['save_error' => "Не удалось сохранить данные. Пожалуйста, попробуйте еще раз. Исключение: $log"]);
+            ->withErrors(['save_error' => "Не удалось сохранить данные. Пожалуйста, попробуйте еще раз.
+            Исключение: $log"]);
 
         return redirect()->to('/home');
     }
