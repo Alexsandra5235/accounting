@@ -58,7 +58,7 @@
                     </a>
                 </label><br>
                 <input class="form-control mb-4" type="time" name="time_receipt" id="time_receipt" maxlength="5"
-                       value="{{ date("H:i", strtotime('+7 hours')) }}">
+                       value="{{ date("H:i") }}">
 
                 <label class="form-label" for="name">Фамилия, имя, отчество (при наличии)
                     <a href="#" style="text-decoration: none"

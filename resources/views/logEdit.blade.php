@@ -18,7 +18,7 @@
                 <h5 class="card-title mb-2">Редактирование данных пациента: <span class="h5" style="color: dodgerblue">{{ $log->patient->name }}</span></h5>
                 <p class="card-text mb-1">Дата и время создания записи: {{ $log->created_at }}</p>
 
-                <p class="card-text mb-1" style="margin-bottom: 8px">Дата и время последнего редактирования записи: {{ $log->created_at }}</p>
+                <p class="card-text mb-1" style="margin-bottom: 8px">Дата и время последнего редактирования записи: {{ $log->updated_at }}</p>
             </div>
         </div>
 

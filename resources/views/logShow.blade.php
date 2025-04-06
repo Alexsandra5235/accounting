@@ -15,9 +15,9 @@
                     </ol>
                 </nav>
                 <h5 class="card-title mb-2">Полная информация по пациенту <span class="h5" style="color: dodgerblue">{{ $log->patient->name }}</span></h5>
-                <p class="card-text mb-1">Дата и время создания записи: {{ $log->created_at }}</p>
+                <p class="card-text mb-1">Дата и время создания записи: {{ \Carbon\Carbon::parse($log->created_at)->format('d.m.Y H:i') }}</p>
 
-                <p class="card-text mb-1" style="margin-bottom: 8px">Дата и время последнего редактирования записи: {{ $log->created_at }}</p>
+                <p class="card-text mb-1" style="margin-bottom: 8px">Дата и время последнего редактирования записи: {{ \Carbon\Carbon::parse($log->updated_at)->format('d.m.Y H:i') }}</p>
 
                 <div class="row row-cols-auto mt-3">
                     <div class="col">

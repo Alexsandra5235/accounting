@@ -75,6 +75,8 @@ class LogService
                 $this->logDischargeService->update($request, $log);
                 $this->logRejectService->update($request, $log);
 
+                $log->updated_at = now();
+                $log->save();
                 return $log;
             });
 
