@@ -145,10 +145,6 @@
                 @if (Route::has('login'))
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none top-50" href="{{ route('login') }}">{{ __('Вход') }}</a>
                 @endif
-
-                @if (Route::has('register'))
-                        <a class="me-3 py-2 link-body-emphasis text-decoration-none top-50" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
-                @endif
             </nav>
         @else
 
