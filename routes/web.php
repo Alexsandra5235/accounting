@@ -15,6 +15,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/users', [UserController::class, 'all'])->name('users');
+    Route::post('/users', [UserController::class, 'store'])->name('user.store');
+});
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/log/add', [LogController::class, 'index'])->name('log.add');
 Route::post('/log/store', [LogController::class, 'store'])->name('log.store');
