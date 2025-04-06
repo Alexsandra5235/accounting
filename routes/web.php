@@ -23,3 +23,4 @@ Route::put('/log/update/{id}', [LogController::class, 'update'])->name('log.upda
 Route::delete('/log/destroy/{id}', [LogController::class, 'destroy'])->name('log.destroy');
 Route::get('/search', [LogController::class, 'search'])->name('log.search');
 Route::post('/api/diagnosis', [SuggestionController::class, 'diagnosis'])->name('api.diagnosis');
+Route::post('/api/country', [SuggestionController::class, 'country'])->name('api.country');

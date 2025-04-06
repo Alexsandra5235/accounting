@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -18,6 +19,7 @@
             overflow-y: auto;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
@@ -101,8 +103,8 @@
 <div class="container py-2">
     <footer class="pt-3 mt-4 text-body-secondary border-top">© 2025</footer>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     function setupSuggestions(inputSelector, suggestionsContainerSelector, valueSelector) {
@@ -123,6 +125,7 @@
                         query: query,
                     }),
                     success: function(data) {
+                        $(suggestionsContainerSelector).empty().hide();
                         if (data.suggestions.length > 0) {
                             data.suggestions.forEach(function(item) {
                                 const code = item.data.code || "Неизвестный код";
@@ -154,9 +157,59 @@
         });
     }
 
+    function setupCountry(inputSelector, suggestionsContainerSelector) {
+        $(inputSelector).on('input', function() {
+            let query = $(this).val();
+            $(suggestionsContainerSelector).empty().hide();
+            if (query.length >= 2) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{ route('api.country') }}',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        query: query,
+                    }),
+                    success: function(data) {
+                        $(suggestionsContainerSelector).empty().hide();
+                        if (data.suggestions.length > 0) {
+                            data.suggestions.forEach(function(item) {
+                                const value = item.value || "Неизвестное значение";
+
+                                let suggestionItem = $('<button class="dropdown-item suggestion-item"></button>');
+                                suggestionItem.text(`${value}`);
+                                suggestionItem.on('click', function() {
+                                    $(inputSelector).val(value);
+                                    $(suggestionsContainerSelector).empty().hide();
+                                });
+                                $(suggestionsContainerSelector).append(suggestionItem);
+                            });
+                            $(suggestionsContainerSelector).show();
+                        }
+                    },
+                    error: function(err) {
+                        console.error('Ошибка при обращении к контроллеру:', err);
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest(inputSelector).length) {
+                $(suggestionsContainerSelector).empty().hide();
+            }
+        });
+    }
+
     setupSuggestions('#state_code', '#suggestions_state', '#state_value');
 
     setupSuggestions('#wound_code', '#suggestions_wound', '#wound_value');
+
+    setupCountry('#nationality', '#suggestions_country')
 
 
 </script>

@@ -116,8 +116,10 @@
                 <input value="{{ old('passport') }}" class="form-control mb-4" type="text" name="passport" id="passport" maxlength="12" placeholder="XX XX XXXXXX">
 
                 <label class="form-label" for="nationality">Гражданство</label><br>
-                <input value="{{ old('nationality') }}" class="form-control mb-4" type="text" id="nationality" name="nationality">
-                <div id="suggestions_country"></div>
+                <div class="mb-4 position-relative">
+                    <input value="{{ old('nationality') }}" class="form-control" type="text" id="nationality" name="nationality">
+                    <div id="suggestions_country" class="dropdown-menu" style="width: 100%"></div>
+                </div>
 
                 <label class="form-label" for="address">Регистрация по месту жительства</label><br>
                 <input value="{{ old('address') }}" class="form-control mb-4" type="text" id="address" name="address" autocomplete="off" size="100">

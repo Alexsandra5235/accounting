@@ -25,6 +25,13 @@ class SuggestionController extends Controller
     {
         return $this->suggestionService->getSuggestions($request, env('API_URL_MKD'));
     }
+    /**
+     * @throws ConnectionException
+     */
+    public function country(Request $request) : JsonResponse
+    {
+        return $this->suggestionService->getSuggestions($request, env('API_URL_COUNTRY'));
+    }
 
 
 
