@@ -11,7 +11,8 @@ class History extends Model
     protected $fillable = [
         'user_id',
         'log_id',
-        'type',
+        'header',
+        'description',
     ];
 
     public function user() : BelongsTo

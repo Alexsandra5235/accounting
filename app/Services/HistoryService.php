@@ -13,7 +13,8 @@ class HistoryService
         return History::query()->create([
             'log_id' => $log->id,
             'user_id' => Auth::id(),
-            'type' => 'Добавление новой записи о пациенте'
+            'header' => 'Добавление новой записи о пациенте',
+            'description' => "Имя пациента: {$log->patient->name}. Номер мед.карты: {$log->patient->medical_card}. Дата и время поступления: {$log->receipt->date_receipt} {$log->receipt->time_receipt}. В настоящий момент запись удалена."
         ]);
     }
     public function update(Log $log) : History
@@ -21,7 +22,17 @@ class HistoryService
         return History::query()->create([
             'log_id' => $log->id,
             'user_id' => Auth::id(),
-            'type' => 'Редактирование данных в журнале'
+            'header' => 'Редактирование данных в журнале',
+            'description' => "Имя пациента: {$log->patient->name}. Номер мед.карты: {$log->patient->medical_card}. Дата и время поступления: {$log->receipt->date_receipt} {$log->receipt->time_receipt}. В настоящий момент запись удалена."
+        ]);
+    }
+    public function destroy(Log $log) : History
+    {
+        return History::query()->create([
+            'log_id' => $log->id,
+            'user_id' => Auth::id(),
+            'header' => 'Удаление данных из журнала',
+            'description' => "Имя пациента: {$log->patient->name}. Номер мед.карты: {$log->patient->medical_card}. Дата и время поступления: {$log->receipt->date_receipt} {$log->receipt->time_receipt}."
         ]);
     }
 }

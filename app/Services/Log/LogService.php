@@ -97,6 +97,7 @@ class LogService
         try{
             return DB::transaction(function () use ($id) {
                 $log = Log::query()->findOrFail($id);
+                $this->historyService->destroy($log);
                 $log->delete();
                 return null;
             });
