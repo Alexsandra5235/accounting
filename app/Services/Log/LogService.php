@@ -84,6 +84,7 @@ class LogService
 
                 $log->updated_at = now();
                 $log->save();
+                $this->historyService->update($log);
                 return $log;
             });
 

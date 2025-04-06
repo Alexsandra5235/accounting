@@ -16,4 +16,12 @@ class HistoryService
             'type' => 'Добавление новой записи о пациенте'
         ]);
     }
+    public function update(Log $log) : History
+    {
+        return History::query()->create([
+            'log_id' => $log->id,
+            'user_id' => Auth::id(),
+            'type' => 'Редактирование данных в журнале'
+        ]);
+    }
 }

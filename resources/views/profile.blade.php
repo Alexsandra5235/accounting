@@ -142,8 +142,8 @@
                                                     <div class="col">
                                                         <div id="content">
                                                             <ul class="timeline">
-                                                                @foreach($user->history as $history)
-                                                                    <li class="event" data-date="{{ $history->created_at }}">
+                                                                @foreach($user->history->sortByDesc('created_at') as $history)
+                                                                    <li class="event" data-date="{{ \Carbon\Carbon::parse($history->created_at)->format('d.m.Y H:i') }}">
                                                                         <h3>{{ $history->type }}</h3>
                                                                         <p>Имя пациента: {{ $history->log->patient->name }}</p>
                                                                         <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>
