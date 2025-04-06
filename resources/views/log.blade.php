@@ -122,12 +122,16 @@
                 </div>
 
                 <label class="form-label" for="address">Регистрация по месту жительства</label><br>
-                <input value="{{ old('address') }}" class="form-control mb-4" type="text" id="address" name="address" autocomplete="off" size="100">
-                <div id="suggestions"></div>
+                <div class="mb-4 position-relative">
+                    <input value="{{ old('address') }}" class="form-control" type="text" id="address" name="address" autocomplete="off" size="100">
+                    <div id="suggestions_address" class="dropdown-menu" style="width: 100%"></div>
+                </div>
 
                 <label class="form-label" for="register_place">Регистрация по месту пребывания пациента</label><br>
-                <input value="{{ old('register_place') }}" type="text" class="form-control" name="register_place" id="register_place">
-                <div id="suggestions-stay" style="margin-top: 0"></div>
+                <div class="position-relative">
+                    <input value="{{ old('register_place') }}" type="text" class="form-control" name="register_place" id="register_place">
+                    <div id="suggestions_register" class="dropdown-menu" style="width: 100%"></div>
+                </div>
                 <label class="mb-4">
                     <input type="checkbox" class="custom-checkbox" value="Совпадает с местом регистрации">
                     Совпадает с местом регистрации

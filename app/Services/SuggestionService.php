@@ -14,15 +14,41 @@ class SuggestionService
     /**
      * @throws ConnectionException
      */
-    public function getSuggestions(Request $request, string $url) : JsonResponse
+    public function getSuggestions(Request $request, string $url, string $token) : JsonResponse
     {
         $query = $request->input('query');
 
         $response = Http::withOptions([
-            'verify' => 'D:\installApp\cacert-2025-02-25.pem',
+            'verify' => env('VERIFY'),
         ])->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => env('API_AUTHORIZATION_TOKEN'),
+            'Authorization' => $token,
+        ])->post($url, [
+            'query' => $query,
+            'count' => 6,
+        ]);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            return response()->json(['suggestions' => $data['suggestions']]);
+        }
+
+        return response()->json(['suggestions' => []], $response->status());
+
+    }
+
+    /**
+     * @throws ConnectionException
+     */
+    public function getAddress(Request $request, string $url, string $token) : JsonResponse
+    {
+        $query = $request->input('query');
+
+        $response = Http::withOptions([
+            'verify' => env('VERIFY'),
+        ])->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Token ' . $token,
         ])->post($url, [
             'query' => $query,
             'count' => 6,

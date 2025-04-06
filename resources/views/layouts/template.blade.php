@@ -14,7 +14,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <style>
-        #suggestions_state, #suggestions_wound {
+        #suggestions_state, #suggestions_wound, #suggestions_address,
+        #suggestions_register{
             max-height: 150px;
             overflow-y: auto;
         }
@@ -177,6 +178,7 @@
                     success: function(data) {
                         $(suggestionsContainerSelector).empty().hide();
                         if (data.suggestions.length > 0) {
+                            $(suggestionsContainerSelector).show();
                             data.suggestions.forEach(function(item) {
                                 const value = item.value || "Неизвестное значение";
 
@@ -188,7 +190,56 @@
                                 });
                                 $(suggestionsContainerSelector).append(suggestionItem);
                             });
+                        }
+                    },
+                    error: function(err) {
+                        console.error('Ошибка при обращении к контроллеру:', err);
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest(inputSelector).length) {
+                $(suggestionsContainerSelector).empty().hide();
+            }
+        });
+    }
+
+    function setupAddress(inputSelector, suggestionsContainerSelector) {
+        $(inputSelector).on('input', function() {
+            let query = $(this).val();
+            $(suggestionsContainerSelector).empty().hide();
+
+            if (query.length >= 2) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ route('api.address') }}', // Laravel route
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        query: query,
+                    }),
+                    success: function(data) {
+                        console.log(data);
+                        if (data.suggestions && data.suggestions.length > 0) {
                             $(suggestionsContainerSelector).show();
+                            data.suggestions.forEach(function(item) {
+                                const value = item.value || "Неизвестное значение";
+
+                                let suggestionItem = $('<button class="dropdown-item suggestion-item"></button>');
+                                suggestionItem.text(value);
+                                suggestionItem.on('click', function() {
+                                    $(inputSelector).val(value);
+                                    $(suggestionsContainerSelector).empty().hide();
+                                });
+                                $(suggestionsContainerSelector).append(suggestionItem);
+                            });
                         }
                     },
                     error: function(err) {
@@ -209,7 +260,11 @@
 
     setupSuggestions('#wound_code', '#suggestions_wound', '#wound_value');
 
-    setupCountry('#nationality', '#suggestions_country')
+    setupCountry('#nationality', '#suggestions_country');
+
+    setupAddress('#address','#suggestions_address');
+
+    setupAddress('#register_place','#suggestions_register');
 
 
 </script>

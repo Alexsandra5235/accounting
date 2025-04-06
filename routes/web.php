@@ -24,3 +24,4 @@ Route::delete('/log/destroy/{id}', [LogController::class, 'destroy'])->name('log
 Route::get('/search', [LogController::class, 'search'])->name('log.search');
 Route::post('/api/diagnosis', [SuggestionController::class, 'diagnosis'])->name('api.diagnosis');
 Route::post('/api/country', [SuggestionController::class, 'country'])->name('api.country');
+Route::post('/api/address', [SuggestionController::class, 'address'])->name('api.address');
