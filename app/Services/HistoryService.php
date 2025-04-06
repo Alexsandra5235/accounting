@@ -13,7 +13,7 @@ class HistoryService
         return History::query()->create([
             'log_id' => $log->id,
             'user_id' => Auth::id(),
-            'type' => 'post'
+            'type' => 'Добавление новой записи о пациенте'
         ]);
     }
 }

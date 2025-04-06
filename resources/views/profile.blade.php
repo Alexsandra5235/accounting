@@ -14,11 +14,9 @@
                             <div class="card-body">
                                 <div class="e-profile">
                                     <div class="row mb-5">
-                                        <div class="col-12 col-sm-auto mb-3">
-                                            <div class="mx-auto" style="width: 140px;">
-                                                <img src="" alt="avatar"
-                                                     class="rounded-circle img-fluid" width="150px" height="150px">
-                                            </div>
+                                        <div class="col-12 col-sm-auto">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                                 class="rounded-circle img-fluid" style="width: 150px;">
                                         </div>
                                         <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                             <div class="text-center text-sm-left mb-2 mb-sm-0">
@@ -63,7 +61,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <nav>
+                                    <nav class="mb-3">
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Настройки</button>
                                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Изменение пароля</button>
@@ -139,9 +137,27 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div id="content">
+                                                            <ul class="timeline">
+                                                                @foreach($user->history as $history)
+                                                                    <li class="event" data-date="{{ $history->created_at }}">
+                                                                        <h3>{{ $history->type }}</h3>
+                                                                        <p>Имя пациента: {{ $history->log->patient->name }}</p>
+                                                                        <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>
+                                                                        <p>Дата и время поступления: {{ $history->log->receipt->date_receipt }} {{ $history->log->receipt->time_receipt }}</p>
 
+                                                                        <a href="{{ route('log.show',['id'=>$history->log_id]) }}">Нажмите, если хотите перейти к записи</a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
