@@ -199,6 +199,9 @@
                                 {{ __('Выйти') }}
                             </a>
                         </li>
+                        @if(Auth::user()->hasRole('admin'))
+                            <li><a class="dropdown-item" href="">Добавить пользователя</a></li>
+                        @endif
                     </ul>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
