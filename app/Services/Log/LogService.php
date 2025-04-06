@@ -5,6 +5,7 @@ namespace App\Services\Log;
 use App\Models\Log\Log;
 use App\Services\ClassifierService;
 use App\Services\DiagnosisService;
+use App\Services\HistoryService;
 use App\Services\PatientService;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,9 +19,11 @@ class LogService
     protected LogRejectService $logRejectService;
     protected ClassifierService $classifierService;
     protected DiagnosisService $diagnosisService;
+    protected HistoryService $historyService;
     public function __construct(PatientService $patientService, LogReceiptService $logReceiptService,
                                 LogDischargeService $logDischargeService, LogRejectService $logRejectService,
-                                ClassifierService $classifierService, DiagnosisService $diagnosisService){
+                                ClassifierService $classifierService, DiagnosisService $diagnosisService,
+                                HistoryService $historyService){
 
         $this->patientService = $patientService;
         $this->logReceiptService = $logReceiptService;
@@ -28,6 +31,7 @@ class LogService
         $this->logRejectService = $logRejectService;
         $this->classifierService = $classifierService;
         $this->diagnosisService = $diagnosisService;
+        $this->historyService = $historyService;
     }
 
     public function validate(Request $request) : void
@@ -51,12 +55,15 @@ class LogService
                 $log_discharge = $this->logDischargeService->store($request);
                 $log_reject = $this->logRejectService->store($request);
 
-                return Log::query()->create([
+                $log = Log::query()->create([
                     'patient_id' => $patient->id,
                     'log_receipt_id' => $log_receipt->id,
                     'log_discharge_id' => $log_discharge->id,
                     'log_reject_id' => $log_reject->id
                 ]);
+
+                $this->historyService->store($log);
+                return $log;
 
             });
         } catch (Exception $e) {

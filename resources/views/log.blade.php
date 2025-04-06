@@ -135,7 +135,7 @@
                 <label class="mb-4">
                     <input type="checkbox" class="custom-checkbox" value="Совпадает с местом регистрации">
                     Совпадает с местом регистрации
-                </label>
+                </label><br>
 
                 <label class="form-label" for="phone_agent">Номер телефона законного представителя, лица, которому может
                     быть передана информация о состоянии здоровья пациента</label>
