@@ -48,7 +48,7 @@ class UserController extends Controller
         $validated = $this->validator($request);
         $user = User::query()->create($validated);
         $user->assignRole('user');
-        return redirect()->to('/users');
+        return redirect()->to('/admin');
     }
     public function edit(Request $request, $id) : object
     {
@@ -59,6 +59,12 @@ class UserController extends Controller
         $user->assignRole($request->input('role'));
 
 
+        return redirect()->back();
+    }
+    public function destroy($id) : object
+    {
+        $user = User::query()->findOrFail($id);
+        $user->delete();
         return redirect()->back();
     }
 }

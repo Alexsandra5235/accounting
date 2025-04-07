@@ -33,7 +33,7 @@
             padding: 50px;
             list-style: none;
             text-align: left;
-            max-width: 40%;
+            max-width: 60%;
         }
 
         @media (max-width: 767px) {
@@ -82,7 +82,7 @@
         }
 
         .timeline .event:before {
-            left: -250px;
+            left: -207px;
             content: attr(data-date);
             text-align: right;
             font-weight: 100;

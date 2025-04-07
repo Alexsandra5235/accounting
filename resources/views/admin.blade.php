@@ -41,6 +41,7 @@
                 <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab" tabindex="0">
                     <div class="tab-content pt-3">
                         <div class="tab-pane active">
+                            <h1>Все пользователи системы</h1>
                             <div class="container">
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                                     @foreach($users as $user)
@@ -64,19 +65,19 @@
                                                 <p class="text-muted mb-1">Роль: {{$user->getRoleNames()->first()}}</p>
                                                 <p class="text-muted mb-4">{{$user->created_at}}</p>
                                                 <div class="d-flex justify-content-center mb-2">
-                                                    <form action="/user/{{$user->id}}/delete" method="post">
+                                                    <form action="{{ route('user.delete',['id'=>$user->id]) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-primary btn-sm">Удалить профиль</button>
                                                     </form>
-                                                    <a href="#" type="button" class="btn btn-outline-primary btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">
+                                                    <a href="#" type="button" class="btn btn-outline-primary btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#exampleModalEdit{{$user->id}}">
                                                         <span>Редактировать</span>
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Вертикально центрированное модальное окно -->
-                                        <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalEditTitle" style="display: none;" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModalEdit{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalEditTitle" style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -149,6 +150,7 @@
                 </div>
                 <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab" tabindex="0">
                     <div class="tab-content pt-3">
+                        <h1>Добавление нового пользователя</h1>
                         <div class="tab-pane active">
                             <div class="card">
                                 <div class="card-header">{{ __('Регистрация') }}</div>
@@ -222,28 +224,33 @@
                 </div>
                 <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab" tabindex="0">
                     <div class="tab-content pt-3">
+                        <h1 class="text-center">История взаимодействия с системой</h1>
                         <div class="tab-pane active">
                             <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <div id="content">
-                                            <ul class="timeline">
-                                                @foreach($histories as $history)
-                                                    <li class="event me-4" data-date="{{ \Carbon\Carbon::parse($history->created_at)->format('d.m.Y H:i') }} {{ $history->user->name }}">
-                                                        <h3>{{ $history->header }}</h3>
-                                                        @if($history->log)
-                                                            <p>Имя пациента: {{ $history->log->patient->name }}</p>
-                                                            <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>
-                                                            <p>Дата и время поступления: {{ $history->log->receipt->date_receipt }} {{ $history->log->receipt->time_receipt }}</p>
-                                                            <a href="{{ route('log.show',['id'=>$history->log_id]) }}">Нажмите, если хотите перейти к записи</a>
-                                                        @else
-                                                            <p>{{ $history->description }}</p>
-                                                        @endif
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div id="content">
+                                    <ul class="timeline">
+                                        @foreach($histories as $history)
+                                            @if($history->user)
+                                                <div class="col d-flex justify-content-end">
+                                                    <a href="#"> {{ $history->user->name }} </a>
+                                                </div>
+                                            @else
+                                                <p class="text-end">Пользователь удален </p>
+                                            @endif
+
+                                            <li class="event me-4" data-date="{{ \Carbon\Carbon::parse($history->created_at)->format('d.m.Y H:i') }}">
+                                                <h3>{{ $history->header }}</h3>
+                                                @if($history->log)
+                                                    <p>Имя пациента: {{ $history->log->patient->name }}</p>
+                                                    <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>
+                                                    <p>Дата и время поступления: {{ $history->log->receipt->date_receipt }} {{ $history->log->receipt->time_receipt }}</p>
+                                                    <a href="{{ route('log.show',['id'=>$history->log_id]) }}">Нажмите, если хотите перейти к записи</a>
+                                                @else
+                                                    <p>{{ $history->description }}</p>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         </div>
