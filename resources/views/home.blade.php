@@ -32,20 +32,22 @@
     </div>
 
     <div class="container">
-
-        <table class="table table-bordered table-hover my-4">
-            <thead>
-            <tr class="table table-active">
-                <td>Дата поступления</td>
-                <td>Время поступления</td>
-                <td>Фамилия, имя, отчество (при наличии)</td>
-                <td>Дата рождения (число, месяц, год)</td>
-                <td>Номер медицинской карты</td>
-                <td>Исход госпитализации, дата и время исхода, наименование медицинской организации, куда переведен пациент</td>
-                <td>Просмотр полной информации</td>
-            </tr>
-            </thead>
-            <tbody>
+        @if($logs->isEmpty())
+            <h1 class="text-center">Данных нет</h1>
+        @else
+            <table class="table table-bordered table-hover my-4">
+                <thead>
+                <tr class="table table-active">
+                    <td>Дата поступления</td>
+                    <td>Время поступления</td>
+                    <td>Фамилия, имя, отчество (при наличии)</td>
+                    <td>Дата рождения (число, месяц, год)</td>
+                    <td>Номер медицинской карты</td>
+                    <td>Исход госпитализации, дата и время исхода, наименование медицинской организации, куда переведен пациент</td>
+                    <td>Просмотр полной информации</td>
+                </tr>
+                </thead>
+                <tbody>
                 @if($logs)
                     @foreach($logs as $log)
                         <tr>
@@ -86,7 +88,8 @@
                         </tr>
                     @endforeach
                 @endif
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        @endif
     </div>
 @endsection

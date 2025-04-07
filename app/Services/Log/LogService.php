@@ -70,27 +70,22 @@ class LogService
             return $e;
         }
     }
-    public function update(Request $request, Log $beforeLog) : Log | Exception
+    public function update(Request $request, Log $log) : Log | Exception
     {
         try {
-            return DB::transaction(function () use ($request, $beforeLog) {
+            return DB::transaction(function () use ($request, $log) {
 
-                $before = $beforeLog->replicate();
+                $this->classifierService->updateState($request, $log);
+                $this->classifierService->updateWound($request, $log);
+                $this->patientService->update($request, $log);
+                $this->logReceiptService->update($request, $log);
+                $this->logDischargeService->update($request, $log);
+                $this->logRejectService->update($request, $log);
 
-                $this->classifierService->updateState($request, $beforeLog);
-                $this->classifierService->updateWound($request, $beforeLog);
-                $this->patientService->update($request, $beforeLog);
-                $this->logReceiptService->update($request, $beforeLog);
-                $this->logDischargeService->update($request, $beforeLog);
-                $this->logRejectService->update($request, $beforeLog);
+                $log->updated_at = now();
+                $log->save();
 
-                $beforeLog->updated_at = now();
-                $beforeLog->save();
-
-                $after = $beforeLog;
-                $this->historyService->update($after, $before);
-
-                return $beforeLog;
+                return $log;
             });
 
         } catch (Exception $e){

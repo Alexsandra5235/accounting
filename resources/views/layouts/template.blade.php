@@ -131,6 +131,12 @@
             left: 0;
             right: -55.8px;
         }
+        /**
+        Выравнивание текста подсказки по левому краю
+         */
+        .custom-tooltip {
+            text-align: left; /* Выровнять текст по левому краю */
+        }
     </style>
 </head>
 <body>
@@ -223,6 +229,7 @@
         // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
         $('[data-bs-toggle="tooltip"]').tooltip();
     });
+
     function setupSuggestions(inputSelector, suggestionsContainerSelector, valueSelector) {
         $(inputSelector).on('input', function() {
             let query = $(this).val();
@@ -343,7 +350,6 @@
                     success: function(data) {
                         console.log(data);
                         if (data.suggestions && data.suggestions.length > 0) {
-                            $(suggestionsContainerSelector).show();
                             data.suggestions.forEach(function(item) {
                                 const value = item.value || "Неизвестное значение";
 
@@ -356,6 +362,7 @@
                                 $(suggestionsContainerSelector).append(suggestionItem);
                             });
                         }
+                        $(suggestionsContainerSelector).show();
                     },
                     error: function(err) {
                         console.error('Ошибка при обращении к контроллеру:', err);

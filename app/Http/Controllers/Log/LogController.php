@@ -44,9 +44,17 @@ class LogController extends Controller
     public function update(Request $request, $id) : object
     {
         $this->logService->validate($request);
-        $beforeLog = Log::query()->findOrFail($id);
 
-        $log = $this->logService->update($request, $beforeLog);
+        $log = Log::with(['receipt', 'discharge', 'reject', 'patient', 'patient.diagnosis.state', 'patient.diagnosis.wound'])->findOrFail($id);
+        $log->load('receipt', 'discharge', 'reject', 'patient', 'patient.diagnosis.state', 'patient.diagnosis.wound');
+        $before = $log->replicate();
+
+
+        $log = $this->logService->update($request, $log);
+
+        $this->historyService->update($log->refresh(), $before);
+
+//        dd($log->refresh(), $before);
 
         if($log instanceof Exception) return redirect()->back()
             ->withErrors(['save_error' => "Не удалось обновить данные. Пожалуйста, попробуйте еще раз.

@@ -27,12 +27,13 @@ class HistoryService
                 foreach ($afterRelated->getAttributes() as $key => $afterValue) {
                     if($key != 'updated_at'){
                         if ($key != 'id' && $afterValue != $beforeRelated->$key) {
-                            $differences["$relationship.$key"] = "{$relationship}.$key: {$afterValue} -> {$beforeRelated->$key};";
+                            $differences["$relationship.$key"] = "{$relationship}.$key: {$beforeRelated->$key} -> {$afterValue};";
                         }
                     }
                 }
             }
         }
+//        dd($afterLog, $beforeLog, $differences);
         return implode("", $differences);
 
     }
@@ -52,7 +53,7 @@ class HistoryService
             'log_id' => $afterLog->id,
             'user_id' => Auth::id(),
             'header' => 'Редактирование данных в журнале',
-            'description' => "Имя пациента: {$beforeLog->patient->name}. Номер мед.карты: {$beforeLog->patient->medical_card}. Дата и время поступления: {$beforeLog->receipt->date_receipt} {$beforeLog->receipt->time_receipt}. В настоящий момент запись удалена.",
+            'description' => "Имя пациента: {$afterLog->patient->name}. Номер мед.карты: {$afterLog->patient->medical_card}. Дата и время поступления: {$afterLog->receipt->date_receipt} {$afterLog->receipt->time_receipt}. В настоящий момент запись удалена.",
             'diff' => $result,
         ]);
     }

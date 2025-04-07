@@ -131,17 +131,23 @@
             <input value="{{ $log->patient->passport }}" class="form-control mb-4" type="text" name="passport" id="passport" maxlength="12" placeholder="XX XX XXXXXX">
 
             <label class="form-label" for="nationality">Гражданство</label><br>
-            <input value="{{ $log->patient->nationality }}" class="form-control mb-4" type="text" id="nationality" name="nationality">
-            <div id="suggestions_country"></div>
+            <div class="mb-4 position-relative">
+                <input value="{{ $log->patient->nationality }}" class="form-control mb-4" type="text" id="nationality" name="nationality">
+                <div id="suggestions_country" class="dropdown-menu" style="width: 100%"></div>
+            </div>
 
             <label class="form-label" for="address">Регистрация по месту жительства</label><br>
-            <input value="{{ $log->patient->address }}" class="form-control mb-4" type="text" id="address" name="address" autocomplete="off" size="100">
-            <div id="suggestions"></div>
+            <div class="mb-4 position-relative">
+                <input value="{{ $log->patient->address }}" class="form-control mb-4" type="text" id="address" name="address" autocomplete="off" size="100">
+                <div id="suggestions_address" class="dropdown-menu" style="width: 100%"></div>
+            </div>
 
             <label class="form-label" for="register_place">Регистрация по месту пребывания пациента</label><br>
-            <input value="{{ $log->patient->register_place }}" type="text" class="form-control" name="register_place" id="register_place">
-            <div id="suggestions-stay" style="margin-top: 0"></div>
-            <label class="mb-4" for="register_place">
+            <div class="position-relative">
+                <input value="{{ $log->patient->register_place }}" type="text" class="form-control" name="register_place" id="register_place">
+                <div id="suggestions_register" class="dropdown-menu" style="width: 100%"></div>
+            </div>
+            <label class="mb-4">
                 <input type="checkbox" class="custom-checkbox" value="Совпадает с местом регистрации">
                 Совпадает с местом регистрации
             </label><br>

@@ -142,19 +142,23 @@
                                                     <div class="col">
                                                         <div id="content">
                                                             <ul class="timeline">
-                                                                @foreach($user->history->sortByDesc('created_at') as $history)
-                                                                    <li class="event" data-date="{{ \Carbon\Carbon::parse($history->created_at)->format('d.m.Y H:i') }}">
-                                                                        <h3>{{ $history->header }}</h3>
-                                                                        @if($history->log)
-                                                                            <p>Имя пациента: {{ $history->log->patient->name }}</p>
-                                                                            <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>
-                                                                            <p>Дата и время поступления: {{ $history->log->receipt->date_receipt }} {{ $history->log->receipt->time_receipt }}</p>
-                                                                            <a href="{{ route('log.show',['id'=>$history->log_id]) }}">Нажмите, если хотите перейти к записи</a>
-                                                                        @else
-                                                                            <p>{{ $history->description }}</p>
-                                                                        @endif
-                                                                    </li>
-                                                                @endforeach
+                                                                @if($user->history->isEmpty())
+                                                                    <h3 class="text-center">Данных нет</h3>
+                                                                @else
+                                                                    @foreach($user->history->sortByDesc('created_at') as $history)
+                                                                        <li class="event" data-date="{{ \Carbon\Carbon::parse($history->created_at)->format('d.m.Y H:i') }}">
+                                                                            <h3>{{ $history->header }}</h3>
+                                                                            @if($history->log)
+                                                                                <p>Имя пациента: {{ $history->log->patient->name }}</p>
+                                                                                <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>
+                                                                                <p>Дата и время поступления: {{ $history->log->receipt->date_receipt }} {{ $history->log->receipt->time_receipt }}</p>
+                                                                                <a href="{{ route('log.show',['id'=>$history->log_id]) }}">Нажмите, если хотите перейти к записи</a>
+                                                                            @else
+                                                                                <p>{{ $history->description }}</p>
+                                                                            @endif
+                                                                        </li>
+                                                                    @endforeach
+                                                                @endif
                                                             </ul>
                                                         </div>
                                                     </div>
