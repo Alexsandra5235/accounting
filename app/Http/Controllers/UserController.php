@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\History;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,11 +20,12 @@ class UserController extends Controller
     {
         return view('profile')->with('user', auth()->user());
     }
-    public function all() : object
+    public function admin() : object
     {
         $currentUserId = Auth::id();
         $users = User::query()->where('id', '!=', $currentUserId)->get();
-        return view('allProfiles')->with('users', $users);
+        $history = History::all()->sortByDesc('created_at');
+        return view('admin')->with('users', $users)->with('histories', $history);
     }
     protected function validator(Request $request): array
     {

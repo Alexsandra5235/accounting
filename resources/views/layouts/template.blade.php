@@ -82,7 +82,7 @@
         }
 
         .timeline .event:before {
-            left: -207px;
+            left: -250px;
             content: attr(data-date);
             text-align: right;
             font-weight: 100;
@@ -196,7 +196,7 @@
                             </a>
                         </li>
                         @if(Auth::user()->hasRole('admin'))
-                            <li><a class="dropdown-item" href="{{ route('users') }}">Управление пользователями</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin') }}">Панель администратора</a></li>
                         @endif
                     </ul>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

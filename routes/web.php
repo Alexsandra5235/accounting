@@ -16,7 +16,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/users', [UserController::class, 'all'])->name('users');
+    Route::get('/admin', [UserController::class, 'admin'])->name('admin');
     Route::post('/users', [UserController::class, 'store'])->name('user.store');
 });
 
