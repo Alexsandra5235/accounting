@@ -20,12 +20,18 @@ class ClassifierService
     public function storeState(Request $request) : Classifier
     {
         $validatedData = $this->validate($request);
-        return Classifier::query()->create($validatedData);
+        return Classifier::query()->create([
+            'code' => $validatedData['state_code'],
+            'value' => $validatedData['state_value'],
+        ]);
     }
     public function storeWound(Request $request) : Classifier
     {
         $validatedData = $this->validate($request);
-        return Classifier::query()->create($validatedData);
+        return Classifier::query()->create([
+            'code' => $validatedData['wound_code'],
+            'value' => $validatedData['wound_value'],
+        ]);
     }
     public function updateState(Request $request, Log $log) : Classifier
     {
