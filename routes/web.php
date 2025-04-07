@@ -18,6 +18,7 @@ Auth::routes();
 Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/admin', [UserController::class, 'admin'])->name('admin');
     Route::post('/users', [UserController::class, 'store'])->name('user.store');
+    Route::put('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -35,11 +35,27 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
+    protected function validatorUpdate(Request $request, $id): array
+    {
+
+        return $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email', 'unique:users,email,'.$id],
+        ]);
+
+    }
     public function store(Request $request) : object
     {
         $validated = $this->validator($request);
         $user = User::query()->create($validated);
         $user->assignRole('user');
         return redirect()->to('/users');
+    }
+    public function edit(Request $request, $id) : object
+    {
+        $user = User::query()->findOrFail($id);
+        $validated = $this->validatorUpdate($request, $id);
+        $user->update($validated);
+        return redirect()->back();
     }
 }

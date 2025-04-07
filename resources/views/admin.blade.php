@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-auto me-auto">
-            <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+    <div class="row m-0">
+        <div class="col-auto">
+            <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
                 <nav class="mb-3">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <ul class="nav nav-pills flex-column mb-auto">
@@ -26,16 +26,6 @@
                                     История взаимодействия
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link text-white" id="nav-user-tab" data-bs-toggle="tab" data-bs-target="#nav-user" type="button" role="tab" aria-controls="nav-home" aria-selected="false">
-                                    Продукты
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link text-white" id="nav-user-tab" data-bs-toggle="tab" data-bs-target="#nav-user" type="button" role="tab" aria-controls="nav-home" aria-selected="false">
-                                    Клиенты
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -43,6 +33,11 @@
         </div>
         <div class="col m-3">
             <div class="tab-content flex-column d-flex" id="nav-tabContent">
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                @endif
                 <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab" tabindex="0">
                     <div class="tab-content pt-3">
                         <div class="tab-pane active">
@@ -71,9 +66,61 @@
                                                     <form action="/user/{{$user->id}}/delete" method="post">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-primary">Удалить профиль</button>
+                                                        <button type="submit" class="btn btn-primary btn-sm">Удалить профиль</button>
                                                     </form>
-                                                    <a href="/user/{{$user->id}}/edit" class="btn btn-outline-primary ms-1">Редактировать</a>
+                                                    <a href="#" type="button" class="btn btn-outline-primary btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">
+                                                        <span>Редактировать</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Вертикально центрированное модальное окно -->
+                                        <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalEditTitle" style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalEditTitle">Редактирование данных профиля</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                                    </div>
+                                                    <form method="POST" action="{{ route('user.edit',['id'=>$user->id]) }}" class="m-2">
+                                                        @csrf
+                                                        @method('put')
+
+                                                        <div class="row mb-3">
+                                                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Имя') }}</label>
+
+                                                            <div class="col-md-6">
+                                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+
+                                                                @error('name')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Почта') }}</label>
+
+                                                            <div class="col-md-6">
+                                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+
+                                                                @error('email')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-0">
+                                                            <div class="col-md-6 offset-md-4">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    {{ __('Изменить') }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
