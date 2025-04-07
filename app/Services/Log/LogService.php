@@ -87,7 +87,7 @@ class LogService
                 $beforeLog->updated_at = now();
                 $beforeLog->save();
 
-                $after = $beforeLog->replicate();
+                $after = $beforeLog;
                 $this->historyService->update($after, $before);
 
                 return $beforeLog;

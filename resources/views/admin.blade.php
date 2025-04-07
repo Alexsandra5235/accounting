@@ -237,9 +237,34 @@
                                             @else
                                                 <p class="text-end">Пользователь удален </p>
                                             @endif
+                                            @php
+                                                $changes = explode(';', $history->diff); // Разделяем строку по символу ";"
+                                                $listItems = '';
+
+                                                foreach ($changes as $change) {
+                                                    $change = trim($change); // Удаляем лишние пробелы
+                                                    if (!empty($change)) {
+                                                        $listItems .= "<li>{$change}</li>"; // Добавляем элемент списка
+                                                    }
+                                                }
+
+                                                $tooltipContent = "<ul>{$listItems}</ul>"; // Формируем окончательный список
+                                            @endphp
 
                                             <li class="event me-4" data-date="{{ \Carbon\Carbon::parse($history->created_at)->format('d.m.Y H:i') }}">
-                                                <h3>{{ $history->header }}</h3>
+                                                <h3>
+                                                    {{ $history->header }}
+                                                    @if(Str::contains("$history->header", 'Редактирование'))
+                                                        <a href="#" style="text-decoration: none"
+                                                           data-bs-toggle="tooltip" data-bs-placement="right"
+                                                           data-bs-custom-class="custom-tooltip" data-bs-html="true"
+                                                           data-bs-title="{{ $tooltipContent  }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="color: dodgerblue" class="bi bi-asterisk" viewBox="0 0 16 16">
+                                                                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/>
+                                                            </svg>
+                                                        </a>
+                                                    @endif
+                                                </h3>
                                                 @if($history->log)
                                                     <p>Имя пациента: {{ $history->log->patient->name }}</p>
                                                     <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>

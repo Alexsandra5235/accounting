@@ -218,6 +218,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    $(function() {
+
+        // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
     function setupSuggestions(inputSelector, suggestionsContainerSelector, valueSelector) {
         $(inputSelector).on('input', function() {
             let query = $(this).val();
