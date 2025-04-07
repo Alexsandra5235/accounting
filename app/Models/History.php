@@ -13,6 +13,7 @@ class History extends Model
         'log_id',
         'header',
         'description',
+        'diff',
     ];
 
     public function user() : BelongsTo

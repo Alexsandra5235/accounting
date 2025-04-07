@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('header');
             $table->text('description');
+            $table->text('diff')->nullable();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('log_id')->nullable()->constrained('logs')->nullOnDelete();
         });

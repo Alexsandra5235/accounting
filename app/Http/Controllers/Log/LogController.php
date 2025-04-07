@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Log\Log;
 use App\Models\Patient;
+use App\Services\HistoryService;
 use App\Services\Log\LogDischargeService;
 use App\Services\Log\LogReceiptService;
 use App\Services\Log\LogRejectService;
@@ -16,9 +17,11 @@ use Illuminate\Http\Request;
 class LogController extends Controller
 {
     protected LogService $logService;
-    public function __construct(LogService $logService){
+    protected HistoryService $historyService;
+    public function __construct(LogService $logService, HistoryService $historyService){
 
         $this->logService = $logService;
+        $this->historyService = $historyService;
         $this->middleware('auth');
     }
     public function show($id) : object
