@@ -37,7 +37,6 @@ class UserController extends Controller
     }
     protected function validatorUpdate(Request $request, $id): array
     {
-
         return $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', 'unique:users,email,'.$id],
@@ -56,6 +55,10 @@ class UserController extends Controller
         $user = User::query()->findOrFail($id);
         $validated = $this->validatorUpdate($request, $id);
         $user->update($validated);
+        $user->roles()->detach();
+        $user->assignRole($request->input('role'));
+
+
         return redirect()->back();
     }
 }

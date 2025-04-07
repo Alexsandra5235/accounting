@@ -61,6 +61,7 @@
 {{--                                                </svg>--}}
                                                 <h5 class="my-3">{{$user->name}}</h5>
                                                 <p class="text-muted mb-1">{{$user->email}}</p>
+                                                <p class="text-muted mb-1">Роль: {{$user->getRoleNames()->first()}}</p>
                                                 <p class="text-muted mb-4">{{$user->created_at}}</p>
                                                 <div class="d-flex justify-content-center mb-2">
                                                     <form action="/user/{{$user->id}}/delete" method="post">
@@ -107,6 +108,22 @@
                                                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
 
                                                                 @error('email')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Роль') }}</label>
+
+                                                            <div class="col-md-6">
+                                                                <select class="form-select" name="role" id="role">
+                                                                    <option {{ $user->getRoleNames()->first() == 'user' ? 'selected' : '' }} value="user">user</option>
+                                                                    <option {{ $user->getRoleNames()->first() == 'admin' ? 'selected' : '' }} value="admin">admin</option>
+                                                                </select>
+
+                                                                @error('role')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
