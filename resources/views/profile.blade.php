@@ -72,9 +72,10 @@
                                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane active">
-                                                    <form action="/profile/edit/{{$user->id}}" method="post">
-                                                        @csrf
+                                                    <form action="{{ route('profile.edit', ['id'=>$user->id]) }}" method="post">
+
                                                         @method('put')
+                                                        @csrf
 
                                                         <div class="form-group mb-2">
                                                             <label for="name" class="form-label">Ваше имя</label>
