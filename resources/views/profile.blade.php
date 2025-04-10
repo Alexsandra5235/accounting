@@ -72,8 +72,7 @@
                                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane active">
-                                                    <form class="form" action="/profile/{{$user->id}}/edit" method="post">
-
+                                                    <form action="/profile/edit/{{$user->id}}" method="post">
                                                         @csrf
                                                         @method('put')
 

@@ -12,6 +12,36 @@ class HistoryService
     {
         $differences = [];
 
+        $nameKey = [
+            'receipt.date_receipt' => 'Дата поступления',
+            'receipt.time_receipt' => 'Время поступления',
+            'patient.name' => 'ФИО',
+            'patient.birth_day' => 'Дата рождения',
+            'patient.gender' => 'Пол',
+            'patient.medical_card' => 'Мед.карта',
+            'patient.passport' => 'Серия и номер паспорта',
+            'patient.nationality' => 'Гражданство',
+            'patient.address' => 'Регистрация по месту жительства',
+            'patient.register_place' => 'Регистрация по месту пребывания',
+            'receipt.phone_agent' => 'Номер телефона законного представителя',
+            'patient.snils' => 'СНИСЛ',
+            'patient.polis' => 'Полис ОМС',
+            'receipt.delivered' => 'Пациент доставлен',
+            'patient.diagnosis.state.code' => 'Диагноз заболевания (состояния)',
+            'patient.diagnosis.wound.code' => 'Причина и обстоятельства травмы',
+            'receipt.fact_alcohol' => 'Факт употребления алкоголя и иных психоактивных веществ',
+            'receipt.datetime_alcohol' => 'Дата и время взятия пробы',
+            'receipt.result_research' => 'Результаты лабораторных исследований',
+            'receipt.section_medical' => 'Отделение медицинской организации, в которое направлен пациент',
+            'discharge.outcome' => 'Исход госпитализации',
+            'discharge.datetime_discharge' => 'Дата и время исхода',
+            'discharge.section_transferred' => 'Наименование медицинской организации, куда переведен пациент',
+            'discharge.datetime_inform' => 'Дата и время сообщения законному представителю о госпитализации',
+            'reject.reason_refusal' => 'Причина отказа в госпитализации',
+            'reject.name_medical_worker' => 'ФИО мед.работника',
+            'reject.add_info' => 'Дополнительные сведения',
+        ];
+
         $relatedModels = [
             'log_receipt_id' => 'receipt',
             'log_discharge_id' => 'discharge',
@@ -27,9 +57,24 @@ class HistoryService
                 foreach ($afterRelated->getAttributes() as $key => $afterValue) {
                     if($key != 'updated_at'){
                         if ($key != 'id' && $afterValue != $beforeRelated->$key) {
-                            $differences["$relationship.$key"] = "{$relationship}.$key: {$beforeRelated->$key} -> {$afterValue};";
+                            $differences["$relationship.$key"] = "{$nameKey["$relationship.$key"]}: {$beforeRelated->$key} -> {$afterValue};";
                         }
                     }
+                }
+                if($relationship === 'patient'){
+                    foreach (['state','wound'] as $relation) {
+                        $beforeRelated = $beforeLog->$relationship->diagnosis->$relation;
+                        $afterRelated = $afterLog->$relationship->diagnosis->$relation;
+
+                        foreach ($afterRelated->getAttributes() as $key => $afterValue) {
+                            if($key != 'updated_at'){
+                                if ($key != 'id' && $afterValue != $beforeRelated->$key) {
+                                    $differences["$relationship.$key"] = "{$nameKey["$relationship.$key"]}: {$beforeRelated->$key} -> {$afterValue};";
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }

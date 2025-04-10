@@ -67,4 +67,11 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back();
     }
+    public function editProfile($id) : object
+    {
+        $profile = User::query()->findOrFail($id);
+        $validated = $this->validator($profile);
+        $profile->update($validated);
+        return view('profile')->with('user', auth()->user());
+    }
 }
