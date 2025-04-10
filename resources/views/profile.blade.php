@@ -145,8 +145,51 @@
                                                                     <h3 class="text-center">Данных нет</h3>
                                                                 @else
                                                                     @foreach($user->history->sortByDesc('created_at') as $history)
+                                                                        @php
+                                                                            $changes = explode(';', $history->diff);
+                                                                            $listItems = [];
+
+                                                                            foreach ($changes as $change) {
+                                                                                $change = trim($change);
+                                                                                if (!empty($change)) {
+                                                                                    $listItems[$change] = "{$change}";
+                                                                                }
+                                                                            }
+
+                                                                            $tooltipContent = $listItems;
+                                                                        @endphp
                                                                         <li class="event" data-date="{{ \Carbon\Carbon::parse($history->created_at)->format('d.m.Y H:i') }}">
-                                                                            <h3>{{ $history->header }}</h3>
+                                                                            <h3>
+                                                                                {{ $history->header }}
+                                                                                @if(Str::contains("$history->header", 'Редактирование'))
+
+                                                                                    <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable{{$history->id}}">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-diff" viewBox="0 0 16 16">
+                                                                                            <path d="M8 5a.5.5 0 0 1 .5.5V7H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V8H6a.5.5 0 0 1 0-1h1.5V5.5A.5.5 0 0 1 8 5zm-2.5 6.5A.5.5 0 0 1 6 11h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                                                                                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                                                        </svg>
+                                                                                        <span></span>
+                                                                                    </a>
+                                                                                    <!-- Вертикально центрированное модальное окно -->
+                                                                                    <div class="modal fade" id="exampleModalScrollable{{$history->id}}" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+                                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                                            <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                    <h5 class="modal-title" id="exampleModalScrollableTitle">Внесенные изменения</h5>
+                                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                                                                                </div>
+                                                                                                <ul class="m-4">
+                                                                                                    @foreach($tooltipContent as $content)
+                                                                                                        <li>
+                                                                                                            {{ $content }}
+                                                                                                        </li>
+                                                                                                    @endforeach
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endif
+                                                                            </h3>
                                                                             @if($history->log)
                                                                                 <p>Имя пациента: {{ $history->log->patient->name }}</p>
                                                                                 <p>Номер медицинской карты: {{ $history->log->patient->medical_card }}</p>
