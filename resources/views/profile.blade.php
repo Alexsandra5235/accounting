@@ -97,41 +97,40 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                                    <div class="col d-flex justify-content-end">
-                                                        <form action="/profile/{{$user->id}}/delete" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger" type="submit">Удалить аккаунт</button>
-                                                        </form>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                            <div class="row">
                                                 <div class="row">
-                                                    <div class="col-12 col-sm-6 mb-3">
-                                                        <div class="form-group my-4">
-                                                            <label class="form-label" for="current_passwd">Текущий пароль</label>
-                                                            <input class="form-control" type="password" name="current_passwd" id="current_passwd">
-                                                            @if ($errors->has('current_passwd'))
-                                                                <div class="text-danger">{{ $errors->first('current_passwd') }}</div>
-                                                            @endif
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="password" class="form-label">Новый пароль</label>
-                                                            <input class="form-control" type="password" name="password" id="password">
-                                                            @if ($errors->has('password'))
-                                                                <div class="text-danger">{{ $errors->first('password') }}</div>
-                                                            @endif
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="repeat_passwd" class="form-label">Повторите пароль</label>
-                                                            <input class="form-control" type="password" name="repeat_passwd" id="repeat_passwd">
-                                                            @if ($errors->has('repeat_passwd'))
-                                                                <div class="text-danger">{{ $errors->first('repeat_passwd') }}</div>
-                                                            @endif
-                                                        </div>
+                                                    <div class="col">
+                                                        <form action="{{ route('profile.edit.password', ['id'=>$user->id]) }}" method="post">
+                                                            @csrf
+                                                            @method('put')
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="current_passwd">Текущий пароль</label>
+                                                                <input class="form-control" type="password" name="current_passwd" id="current_passwd">
+                                                                @if ($errors->has('current_passwd'))
+                                                                    <div class="text-danger">{{ $errors->first('current_passwd') }}</div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="password" class="form-label">Новый пароль</label>
+                                                                <input class="form-control" type="password" name="password" id="password">
+                                                                @if ($errors->has('password'))
+                                                                    <div class="text-danger">{{ $errors->first('password') }}</div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="form-group my-3">
+                                                                <label for="password_confirmation" class="form-label">Повторите пароль</label>
+                                                                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation">
+                                                                @if ($errors->has('repeat_passwd'))
+                                                                    <div class="text-danger">{{ $errors->first('repeat_passwd') }}</div>
+                                                                @endif
+                                                            </div>
+                                                            <input class="btn btn-primary" type="submit" value="Сохранить">
+
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

@@ -35,4 +35,5 @@ Route::post('/api/country', [SuggestionController::class, 'country'])->name('api
 Route::post('/api/address', [SuggestionController::class, 'address'])->name('api.address');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 Route::put('/profile/edit/{id}', [UserController::class, 'editProfile'])->name('profile.edit');
+Route::put('/profile/update/{id}/password', [UserController::class, 'updatePassword'])->name('profile.edit.password');
 
